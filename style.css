@@ -1,0 +1,59 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background: #fff8e7;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+h1 {
+  color: #d35400;
+}
+
+.cookie img {
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cookie img:hover {
+  transform: scale(1.1);
+}
+
+.fortune-box {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#fortuneText {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+button {
+  padding: 10px 20px;
+  background: #d35400;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e67e22;
+}
+
+footer {
+  margin-top: 50px;
+  font-size: 0.8rem;
+  color: #888;
+}
