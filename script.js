@@ -28,7 +28,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   cookie.addEventListener("click", showFortune);
   button.addEventListener("click", showFortune);
+
+  const shareTwitterBtn = document.getElementById("shareTwitterBtn");
+  const shareFacebookBtn = document.getElementById("shareFacebookBtn");
+
+  shareTwitterBtn.addEventListener("click", shareOnTwitter);
+  shareFacebookBtn.addEventListener("click", shareOnFacebook);
 });
+
+function shareOnTwitter() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const tweetText = `I got a fortune: "${fortuneText}"`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+  window.open(twitterUrl, "_blank");
+}
+
+function shareOnFacebook() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(fortuneText)}`;
+  window.open(facebookUrl, "_blank");
+}
 
 function showFortune() {
   const fortuneText = document.getElementById("fortuneText");
