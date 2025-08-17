@@ -92,7 +92,7 @@ function launchConfetti() {
 }
 
 function startCooldown(button) {
-  let cooldown = 5;
+  let cooldown = 10;
   button.disabled = true;
   button.textContent = `Next fortune in ${cooldown}s`;
 
