@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   shareWhatsappBtn.addEventListener("click", shareOnWhatsapp);
   shareTiktokBtn.addEventListener("click", copyForTiktok);
+
+  const shareInstagramBtn = document.getElementById("shareInstagramBtn");
+  shareInstagramBtn.addEventListener("click", copyForTiktok);
 });
 
 function shareOnWhatsapp() {
