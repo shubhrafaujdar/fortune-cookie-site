@@ -1,0 +1,14 @@
+{
+  "name": "fortune-cookie",
+  "version": "1.0.0",
+  "description": "A simple fortune cookie app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "upload-fortunes": "node scripts/upload_fortunes.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^11.5.0"
+  }
+}
