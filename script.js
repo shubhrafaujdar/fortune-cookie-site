@@ -29,3 +29,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   cookie.addEventListener("click", showFortune);
   button.addEventListener("click", showFortune);
 });
+
+function showFortune() {
+  const fortuneText = document.getElementById("fortuneText");
+  fortuneText.textContent = getRandomFortune();
+
+  // trigger fade-in animation
+  fortuneText.style.opacity = 0;
+  fortuneText.style.transform = "translateY(10px)";
+  setTimeout(() => {
+    fortuneText.style.transition = "0.5s";
+    fortuneText.style.opacity = 1;
+    fortuneText.style.transform = "translateY(0)";
+  }, 50);
+
+  // optional confetti
+  launchConfetti();
+}

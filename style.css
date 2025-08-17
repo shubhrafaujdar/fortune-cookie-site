@@ -1,59 +1,91 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  background: #fff8e7;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #fffaf0, #fceabb);
   margin: 0;
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.container {
-  margin-top: 50px;
+.app {
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  padding: 20px;
 }
 
 h1 {
-  color: #d35400;
+  font-weight: 700;
+  color: #e67e22;
 }
 
-.cookie img {
-  width: 150px;
+.cookie {
+  width: 120px;
+  height: 120px;
+  margin: 30px auto;
+  background: url('cookie.png') no-repeat center/contain;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-
-.cookie img:hover {
+.cookie:hover {
   transform: scale(1.1);
 }
 
-.fortune-box {
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 400px;
+.fortune-card {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-#fortuneText {
-  font-size: 1.2rem;
-  color: #2c3e50;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  margin: 20px 0;
 }
 
 button {
-  padding: 10px 20px;
-  background: #d35400;
+  padding: 14px 28px;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
+  background: #e67e22;
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
+  transition: 0.2s;
 }
-
 button:hover {
-  background: #e67e22;
+  background: #d35400;
 }
 
-footer {
-  margin-top: 50px;
-  font-size: 0.8rem;
-  color: #888;
+/* Cookie bounce on hover */
+.cookie:hover {
+  animation: bounce 0.5s ease;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Fortune fade-in */
+.fortune-card p {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.5s forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button hover scale */
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Confetti (optional) */
+.confetti {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #e67e22;
+  animation: fall 2s linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(500px) rotate(720deg); opacity: 0; }
 }
