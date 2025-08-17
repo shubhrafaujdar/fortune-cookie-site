@@ -15,19 +15,20 @@ function getRandomFortune() {
   return fortunes[index];
 }
 
-function showFortune() {
-  const fortuneText = document.getElementById("fortuneText");
-  fortuneText.textContent = getRandomFortune();
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   await loadFortunes();
   
   const cookie = document.getElementById("cookie");
   const button = document.getElementById("newFortuneBtn");
 
-  cookie.addEventListener("click", showFortune);
-  button.addEventListener("click", showFortune);
+  cookie.addEventListener("click", () => {
+    showFortune();
+    startCooldown(button);
+  });
+  button.addEventListener("click", () => {
+    showFortune();
+    startCooldown(button);
+  });
 
   const shareTwitterBtn = document.getElementById("shareTwitterBtn");
   const shareFacebookBtn = document.getElementById("shareFacebookBtn");
@@ -88,4 +89,21 @@ function launchConfetti() {
     // remove after animation
     setTimeout(() => confetti.remove(), duration * 1000);
   }
+}
+
+function startCooldown(button) {
+  let cooldown = 10;
+  button.disabled = true;
+  button.textContent = `Next fortune in ${cooldown}s`;
+
+  const interval = setInterval(() => {
+    cooldown--;
+    if (cooldown > 0) {
+      button.textContent = `Next fortune in ${cooldown}s`;
+    } else {
+      clearInterval(interval);
+      button.disabled = false;
+      button.textContent = "Crack Another Fortune";
+    }
+  }, 1000);
 }
