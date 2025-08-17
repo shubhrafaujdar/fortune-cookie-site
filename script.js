@@ -35,7 +35,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   shareTwitterBtn.addEventListener("click", shareOnTwitter);
   shareFacebookBtn.addEventListener("click", shareOnFacebook);
+
+  const shareWhatsappBtn = document.getElementById("shareWhatsappBtn");
+  const shareTiktokBtn = document.getElementById("shareTiktokBtn");
+
+  shareWhatsappBtn.addEventListener("click", shareOnWhatsapp);
+  shareTiktokBtn.addEventListener("click", copyForTiktok);
 });
+
+function shareOnWhatsapp() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fortuneText)}`;
+  window.open(whatsappUrl, "_blank");
+}
+
+function copyForTiktok() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  navigator.clipboard.writeText(fortuneText).then(() => {
+    alert("Fortune copied to clipboard!");
+  }, () => {
+    alert("Failed to copy fortune.");
+  });
+}
 
 function shareOnTwitter() {
   const fortuneText = document.getElementById("fortuneText").textContent;
