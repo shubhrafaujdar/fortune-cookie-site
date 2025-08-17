@@ -145,3 +145,41 @@ button:hover {
   background-color: #bb86fc;
   color: #121212;
 }
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .cookie {
+    width: 120px;
+    height: 60px;
+    border-radius: 60px 60px 0 0;
+  }
+
+  .cookie::before {
+    width: 90px;
+  }
+
+  .fortune-card {
+    padding: 20px;
+  }
+
+  button {
+    padding: 12px 28px;
+  }
+
+  .social-sharing button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-sharing button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
