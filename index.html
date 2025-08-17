@@ -59,3 +59,25 @@
     <div class="ad-slot">Ad space</div>
   </footer>
 </div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Firebase Configuration -->
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjsSEUARsqhrbsppm_E1uXf708Xw62aFM",
+    authDomain: "fortune-cookie-e873d.firebaseapp.com",
+    projectId: "fortune-cookie-e873d",
+    storageBucket: "fortune-cookie-e873d.firebasestorage.app",
+    messagingSenderId: "289008586719",
+    appId: "1:289008586719:web:d75e5c6b7ba72b27fe7e6a",
+    measurementId: "G-QCB85VTH6Z"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>

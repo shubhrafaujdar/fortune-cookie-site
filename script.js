@@ -2,11 +2,11 @@ let fortunes = [];
 
 async function loadFortunes() {
   try {
-    const res = await fetch('fortunes.json');
-    fortunes = await res.json();
+    const snapshot = await db.collection("fortunes").get();
+    fortunes = snapshot.docs.map(doc => doc.data().text);
   } catch (error) {
-    console.error("Error loading fortunes:", error);
-    fortunes = ["Good fortune awaits you.", "Your cookie is empty! Try again."];
+    console.error("Error loading fortunes from Firestore:", error);
+    fortunes = ["Could not load fortunes from the database. Please try again later.", "Your cookie is empty! Try again."];
   }
 }
 
