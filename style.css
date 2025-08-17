@@ -127,7 +127,18 @@ button:hover {
   border: 1px solid #bb86fc;
   color: #bb86fc;
   margin: 0 10px;
-  padding: 10px 20px;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-sharing button svg {
+  width: 24px;
+  height: 24px;
 }
 
 .social-sharing button:hover {
