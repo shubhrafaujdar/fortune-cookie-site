@@ -48,14 +48,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function shareOnWhatsapp() {
   const fortuneText = document.getElementById("fortuneText").textContent;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fortuneText)}`;
+  const shareText = `${fortuneText}\n\n${window.location.href}`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
   window.open(whatsappUrl, "_blank");
 }
 
 function copyForTiktok() {
   const fortuneText = document.getElementById("fortuneText").textContent;
-  navigator.clipboard.writeText(fortuneText).then(() => {
-    alert("Fortune copied to clipboard!");
+  const shareText = `${fortuneText}\n\nCheck out this fortune cookie app: ${window.location.href}`;
+  navigator.clipboard.writeText(shareText).then(() => {
+    alert("Fortune and link copied to clipboard!");
   }, () => {
     alert("Failed to copy fortune.");
   });
@@ -63,8 +65,8 @@ function copyForTiktok() {
 
 function shareOnTwitter() {
   const fortuneText = document.getElementById("fortuneText").textContent;
-  const tweetText = `I got a fortune: "${fortuneText}"`;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+  const tweetText = `I got a fortune: "${fortuneText}"\n\nCheck out this cool app:`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(window.location.href)}`;
   window.open(twitterUrl, "_blank");
 }
 
