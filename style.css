@@ -183,3 +183,12 @@ button:hover {
     height: 20px;
   }
 }
+
+.bmc-button img {
+  height: 36px;
+  width: auto;
+}
+
+.bmc-button {
+  margin-bottom: 15px;
+}
