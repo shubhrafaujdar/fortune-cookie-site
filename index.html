@@ -1,17 +1,29 @@
-<div class="app">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Cookie Online - Get Your Daily Dose of Wisdom</title>
+    <meta name="description" content="Crack open a virtual fortune cookie and receive a random, fun, or insightful fortune. Get your daily dose of wisdom and share it with your friends!">
+    <meta name="keywords" content="fortune cookie, online fortune cookie, virtual fortune cookie, daily fortune, wisdom, fun, share fortune">
+    <meta property="og:title" content="Fortune Cookie Online">
+    <meta property="og:description" content="Crack open a virtual fortune cookie and get your daily dose of wisdom.">
+    <meta property="og:image" content="https://shubhrafaujdar.github.io/fortune-cookie-site/images/og-image.jpg">
+    <meta property="og:url" content="https://shubhrafaujdar.github.io/fortune-cookie-site">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="style.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PWPVMHVFW8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-PWPVMHVFW8');
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-
+</head>
+<body>
+<div class="app">
   <header>
     <h1>🥠 Fortune Cookie</h1>
   </header>
@@ -20,7 +32,7 @@
     <div class="cookie" id="cookie"></div>
 
     <div class="fortune-card" id="fortuneCard">
-      <p id="fortuneText">Click the cookie to reveal your fortune!</p>
+      <p id="fortuneText">The early bird gets the worm, but the second mouse gets the cheese.</p>
     </div>
 
     <button id="newFortuneBtn">Crack Another Fortune</button>
@@ -63,6 +75,7 @@
   </footer>
 </div>
 
+<script src="script.js"></script>
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -84,3 +97,5 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 </script>
+</body>
+</html>
