@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #fffaf0, #fceabb);
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
+  color: #ffffff;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -17,75 +20,175 @@ body {
 
 h1 {
   font-weight: 700;
-  color: #e67e22;
+  color: #bb86fc;
 }
 
 .cookie {
-  width: 120px;
-  height: 120px;
-  margin: 30px auto;
-  background: url('cookie.png') no-repeat center/contain;
+  width: 150px;
+  height: 75px;
+  margin: 40px auto;
+  background: linear-gradient(to top, #f3d19c, #e6a25c);
+  border-radius: 75px 75px 0 0;
+  position: relative;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
+
+.cookie::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 10px;
+  background: white;
+  bottom: 10px;
+  left: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+}
+
 .cookie:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .fortune-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-  margin: 20px 0;
+  background: #1e1e1e;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  margin: 30px 0;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fortuneText {
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 button {
-  padding: 14px 28px;
+  padding: 15px 35px;
   border: none;
-  border-radius: 999px;
-  background: #e67e22;
-  color: #fff;
+  border-radius: 50px;
+  background: #bb86fc;
+  color: #121212;
   font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
 }
+
 button:hover {
-  background: #d35400;
+  background: #a362ff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(187, 134, 252, 0.4);
 }
 
 /* Cookie bounce on hover */
 .cookie:hover {
-  animation: bounce 0.5s ease;
+  animation: bounce 0.6s ease-in-out;
 }
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-10deg); }
 }
 
 /* Fortune fade-in */
 .fortune-card p {
   opacity: 0;
-  transform: translateY(10px);
-  animation: fadeIn 0.5s forwards;
+  transform: translateY(15px);
+  animation: fadeIn 0.6s forwards;
 }
 @keyframes fadeIn {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Button hover scale */
-button:hover {
-  transform: scale(1.05);
-}
-
-/* Confetti (optional) */
+/* Confetti */
 .confetti {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #e67e22;
-  animation: fall 2s linear forwards;
+  width: 8px;
+  height: 8px;
+  background: #bb86fc;
+  animation: fall 2.5s linear forwards;
+  border-radius: 50%;
 }
 @keyframes fall {
-  to { transform: translateY(500px) rotate(720deg); opacity: 0; }
+  to { transform: translateY(600px) rotate(1080deg); opacity: 0; }
+}
+
+.social-sharing {
+  margin-top: 30px;
+}
+
+.social-sharing button {
+  background-color: transparent;
+  border: 1px solid #bb86fc;
+  color: #bb86fc;
+  margin: 0 10px;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-sharing button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.social-sharing button:hover {
+  background-color: #bb86fc;
+  color: #121212;
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .cookie {
+    width: 120px;
+    height: 60px;
+    border-radius: 60px 60px 0 0;
+  }
+
+  .cookie::before {
+    width: 90px;
+  }
+
+  .fortune-card {
+    padding: 20px;
+  }
+
+  button {
+    padding: 12px 28px;
+  }
+
+  .social-sharing button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-sharing button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.bmc-button img {
+  height: 36px;
+  width: auto;
+}
+
+.bmc-button {
+  margin-bottom: 15px;
 }

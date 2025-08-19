@@ -2,11 +2,11 @@ let fortunes = [];
 
 async function loadFortunes() {
   try {
-    const res = await fetch('fortunes.json');
-    fortunes = await res.json();
+    const snapshot = await db.collection("fortunes").get();
+    fortunes = snapshot.docs.map(doc => doc.data().text);
   } catch (error) {
-    console.error("Error loading fortunes:", error);
-    fortunes = ["Good fortune awaits you.", "Your cookie is empty! Try again."];
+    console.error("Error loading fortunes from Firestore:", error);
+    fortunes = ["Could not load fortunes from the database. Please try again later.", "Your cookie is empty! Try again."];
   }
 }
 
@@ -15,20 +15,66 @@ function getRandomFortune() {
   return fortunes[index];
 }
 
-function showFortune() {
-  const fortuneText = document.getElementById("fortuneText");
-  fortuneText.textContent = getRandomFortune();
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   await loadFortunes();
   
   const cookie = document.getElementById("cookie");
   const button = document.getElementById("newFortuneBtn");
 
-  cookie.addEventListener("click", showFortune);
-  button.addEventListener("click", showFortune);
+  cookie.addEventListener("click", () => {
+    showFortune();
+    startCooldown(button);
+  });
+  button.addEventListener("click", () => {
+    showFortune();
+    startCooldown(button);
+  });
+
+  const shareTwitterBtn = document.getElementById("shareTwitterBtn");
+  const shareFacebookBtn = document.getElementById("shareFacebookBtn");
+
+  shareTwitterBtn.addEventListener("click", shareOnTwitter);
+  shareFacebookBtn.addEventListener("click", shareOnFacebook);
+
+  const shareWhatsappBtn = document.getElementById("shareWhatsappBtn");
+  const shareTiktokBtn = document.getElementById("shareTiktokBtn");
+
+  shareWhatsappBtn.addEventListener("click", shareOnWhatsapp);
+  shareTiktokBtn.addEventListener("click", copyForTiktok);
+
+  const shareInstagramBtn = document.getElementById("shareInstagramBtn");
+  shareInstagramBtn.addEventListener("click", copyForTiktok);
 });
+
+function shareOnWhatsapp() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const shareText = `${fortuneText}\n\n${window.location.href}`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+  window.open(whatsappUrl, "_blank");
+}
+
+function copyForTiktok() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const shareText = `${fortuneText}\n\nCheck out this fortune cookie app: ${window.location.href}`;
+  navigator.clipboard.writeText(shareText).then(() => {
+    alert("Fortune and link copied to clipboard!");
+  }, () => {
+    alert("Failed to copy fortune.");
+  });
+}
+
+function shareOnTwitter() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const tweetText = `I got a fortune: "${fortuneText}"\n\nCheck out this cool app:`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(window.location.href)}`;
+  window.open(twitterUrl, "_blank");
+}
+
+function shareOnFacebook() {
+  const fortuneText = document.getElementById("fortuneText").textContent;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(fortuneText)}`;
+  window.open(facebookUrl, "_blank");
+}
 
 function showFortune() {
   const fortuneText = document.getElementById("fortuneText");
@@ -69,4 +115,21 @@ function launchConfetti() {
     // remove after animation
     setTimeout(() => confetti.remove(), duration * 1000);
   }
+}
+
+function startCooldown(button) {
+  let cooldown = 10;
+  button.disabled = true;
+  button.textContent = `Next fortune in ${cooldown}s`;
+
+  const interval = setInterval(() => {
+    cooldown--;
+    if (cooldown > 0) {
+      button.textContent = `Next fortune in ${cooldown}s`;
+    } else {
+      clearInterval(interval);
+      button.disabled = false;
+      button.textContent = "Crack Another Fortune";
+    }
+  }, 1000);
 }
