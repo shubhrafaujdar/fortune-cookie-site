@@ -1,3 +1,13 @@
+// --- Google Analytics Event Tracking ---
+function trackEvent(action, params) {
+  if (typeof gtag === 'function') {
+    gtag('event', action, params);
+  } else {
+    console.log(`Analytics event (not sent): ${action}`, params);
+  }
+}
+// -----------------------------------------
+
 let fortunes = [];
 let isCooldown = false;
 
@@ -36,19 +46,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   const shareTwitterBtn = document.getElementById("shareTwitterBtn");
-  const shareFacebookBtn = document.getElementById("shareFacebookBtn");
+  shareTwitterBtn.addEventListener("click", () => {
+    trackEvent('share', { 'method': 'Twitter' });
+    shareOnTwitter();
+  });
 
-  shareTwitterBtn.addEventListener("click", shareOnTwitter);
-  shareFacebookBtn.addEventListener("click", shareOnFacebook);
+  const shareFacebookBtn = document.getElementById("shareFacebookBtn");
+  shareFacebookBtn.addEventListener("click", () => {
+    trackEvent('share', { 'method': 'Facebook' });
+    shareOnFacebook();
+  });
 
   const shareWhatsappBtn = document.getElementById("shareWhatsappBtn");
-  const shareTiktokBtn = document.getElementById("shareTiktokBtn");
+  shareWhatsappBtn.addEventListener("click", () => {
+    trackEvent('share', { 'method': 'WhatsApp' });
+    shareOnWhatsapp();
+  });
 
-  shareWhatsappBtn.addEventListener("click", shareOnWhatsapp);
-  shareTiktokBtn.addEventListener("click", copyForTiktok);
+  const shareTiktokBtn = document.getElementById("shareTiktokBtn");
+  shareTiktokBtn.addEventListener("click", () => {
+    trackEvent('share', { 'method': 'TikTok' });
+    copyForTiktok();
+  });
 
   const shareInstagramBtn = document.getElementById("shareInstagramBtn");
-  shareInstagramBtn.addEventListener("click", copyForTiktok);
+  shareInstagramBtn.addEventListener("click", () => {
+    trackEvent('share', { 'method': 'Instagram' });
+    copyForTiktok();
+  });
+
+  const bmcButton = document.querySelector('.bmc-button');
+  bmcButton.addEventListener('click', () => {
+    trackEvent('generate_lead', {
+      'item_name': 'Buy Me a Coffee'
+    });
+  });
 });
 
 function shareOnWhatsapp() {
@@ -82,6 +114,10 @@ function shareOnFacebook() {
 }
 
 function showFortune() {
+  trackEvent('generate_fortune', {
+    'category': 'engagement'
+  });
+
   const fortuneText = document.getElementById("fortuneText");
   fortuneText.textContent = getRandomFortune();
 
