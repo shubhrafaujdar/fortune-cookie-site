@@ -1,4 +1,5 @@
 let fortunes = [];
+let isCooldown = false;
 
 async function loadFortunes() {
   try {
@@ -22,12 +23,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const button = document.getElementById("newFortuneBtn");
 
   cookie.addEventListener("click", () => {
-    showFortune();
-    startCooldown(button);
+    if (!isCooldown) {
+      showFortune();
+      startCooldown(button);
+    }
   });
   button.addEventListener("click", () => {
-    showFortune();
-    startCooldown(button);
+    if (!isCooldown) {
+      showFortune();
+      startCooldown(button);
+    }
   });
 
   const shareTwitterBtn = document.getElementById("shareTwitterBtn");
@@ -118,6 +123,7 @@ function launchConfetti() {
 }
 
 function startCooldown(button) {
+  isCooldown = true;
   let cooldown = 10;
   button.disabled = true;
   button.textContent = `Next fortune in ${cooldown}s`;
@@ -130,6 +136,7 @@ function startCooldown(button) {
       clearInterval(interval);
       button.disabled = false;
       button.textContent = "Crack Another Fortune";
+      isCooldown = false;
     }
   }, 1000);
 }
