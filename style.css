@@ -194,3 +194,10 @@ button:hover {
   margin-top: 30px;
   margin-bottom: 15px;
 }
+
+body.page-scrollable {
+  height: auto;
+  align-items: flex-start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
