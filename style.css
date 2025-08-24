@@ -21,6 +21,9 @@ body {
 h1 {
   font-weight: 700;
   color: #bb86fc;
+  margin-top: 0;
+  padding-top: 40px;
+  margin-bottom: 40px;
 }
 
 .cookie {
@@ -200,8 +203,4 @@ body.page-scrollable {
   align-items: flex-start;
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-body.page-scrollable main {
-  margin-top: 80px;
 }
