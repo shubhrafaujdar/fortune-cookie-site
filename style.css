@@ -201,3 +201,7 @@ body.page-scrollable {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+body.page-scrollable main {
+  padding-top: 60px;
+}
