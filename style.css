@@ -8,7 +8,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .app {
@@ -196,12 +195,8 @@ button:hover {
 }
 
 body.page-scrollable {
-  display: block !important;
-  height: auto !important;
+  height: auto;
+  align-items: flex-start;
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-body.page-scrollable .app {
-  margin: 0 auto;
 }
