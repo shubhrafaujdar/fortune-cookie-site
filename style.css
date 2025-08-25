@@ -196,8 +196,8 @@ button:hover {
 }
 
 body.page-scrollable {
-  display: block;
-  height: auto;
+  display: block !important;
+  height: auto !important;
   padding-top: 20px;
   padding-bottom: 20px;
 }
