@@ -28,6 +28,7 @@ function getRandomFortune() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadFortunes();
+  showFortune();
   
   const cookie = document.getElementById("cookie");
   const button = document.getElementById("newFortuneBtn");
