@@ -113,9 +113,11 @@ button:hover {
   background: #bb86fc;
   animation: fall 2.5s linear forwards;
   border-radius: 50%;
+  top: -20px;
+  z-index: 1000;
 }
 @keyframes fall {
-  to { transform: translateY(600px) rotate(1080deg); opacity: 0; }
+  to { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
 }
 
 .social-sharing {
