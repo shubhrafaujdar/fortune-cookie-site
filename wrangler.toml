@@ -1,0 +1,9 @@
+name = "fortune-cookie-site"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fortune-cookie-db"
+database_id = "0388cd6e-bc7a-4984-83bf-90373826ff4f"

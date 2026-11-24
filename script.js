@@ -13,10 +13,11 @@ let isCooldown = false;
 
 async function loadFortunes() {
   try {
-    const snapshot = await db.collection("fortunes").get();
-    fortunes = snapshot.docs.map(doc => doc.data().text);
+    const response = await fetch("/api/fortunes");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    fortunes = await response.json();
   } catch (error) {
-    console.error("Error loading fortunes from Firestore:", error);
+    console.error("Error loading fortunes from D1:", error);
     fortunes = ["Could not load fortunes from the database. Please try again later.", "Your cookie is empty! Try again."];
   }
 }

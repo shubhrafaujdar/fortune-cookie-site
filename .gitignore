@@ -1,0 +1,5 @@
+
+# Secrets & local wrangler state
+.env
+.wrangler/
+node_modules/

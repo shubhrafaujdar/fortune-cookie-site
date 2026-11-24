@@ -5,10 +5,17 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "upload-fortunes": "node scripts/upload_fortunes.js"
+    "upload-fortunes": "node scripts/upload_fortunes.js",
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy .",
+    "db:seed:local": "wrangler d1 execute fortune-cookie-db --local --file=./schema.sql && wrangler d1 execute fortune-cookie-db --local --file=./seed.sql",
+    "db:seed:remote": "wrangler d1 execute fortune-cookie-db --remote --file=./schema.sql && wrangler d1 execute fortune-cookie-db --remote --file=./seed.sql"
   },
   "dependencies": {
     "express": "^4.17.1",
     "firebase-admin": "^11.5.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.167.0"
   }
 }
