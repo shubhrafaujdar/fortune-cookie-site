@@ -47,7 +47,7 @@ npm run lint
   computers get Copy, X, WhatsApp, Facebook and Email (`src/lib/share.js`).
 - **Sign-in: Google only**, through Firebase Authentication (`src/lib/auth.js`, settings in
   `src/lib/firebaseConfig.js`). One-time setup in the Firebase console for project
-  `fortune-cookie-e873d`:
+  `daily-fortune-cookies`:
   1. Authentication → Sign-in method → **Google** → Enable → Save.
   2. Authentication → Settings → Authorized domains → add `dailyfortunecookies.com` and
      `www.dailyfortunecookies.com` (`localhost` is already there for `npm run dev`).
