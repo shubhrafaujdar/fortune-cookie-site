@@ -1,0 +1,423 @@
+/* ------------------------------------------------------------ the shop */
+.shop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  overflow: clip;
+  background: var(--espresso);
+}
+
+.shop-backdrop {
+  position: absolute;
+  inset: -40px;
+  background-size: cover;
+  background-position: 50% 0;
+  filter: blur(26px) brightness(0.62) saturate(1);
+}
+.shop.is-portrait::before {
+  /* darkens the backdrop smoothly into the top edge of the painting */
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(var(--seam) + 2px);
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(32, 23, 18, 0.15), rgba(32, 23, 18, 0.97));
+}
+
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  transition: filter 1.4s ease;
+}
+.has-ritual .stage {
+  filter: blur(2.5px) brightness(0.82);
+}
+
+.shop.is-portrait .stage::before {
+  /* melt the top edge of the painting into the blurred backdrop */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 170px;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(32, 23, 18, 0.97), rgba(32, 23, 18, 0.6) 35%, rgba(32, 23, 18, 0));
+  pointer-events: none;
+}
+
+.scene-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: filter 2s ease;
+}
+.mood-day .scene-art {
+  filter: brightness(1.07) saturate(1.04);
+}
+.mood-night .scene-art {
+  filter: brightness(0.9) saturate(0.95);
+}
+
+.rain-window {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+.mood-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  transition: background 2s ease;
+}
+.mood-day .mood-tint {
+  background: linear-gradient(to bottom, rgba(255, 240, 215, 0.04), rgba(255, 220, 180, 0.02));
+}
+.mood-dusk .mood-tint {
+  background: linear-gradient(to bottom, rgba(150, 90, 70, 0.12), rgba(90, 50, 40, 0.1));
+}
+.mood-night .mood-tint {
+  background: linear-gradient(to bottom, rgba(45, 50, 85, 0.28), rgba(40, 28, 30, 0.2));
+}
+
+.lantern-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 205, 130, 0.5) 0%, rgba(214, 167, 94, 0.2) 38%, rgba(214, 167, 94, 0) 70%);
+  mix-blend-mode: screen;
+  --base: 0.75;
+  animation: flicker 6.5s ease-in-out infinite;
+  transition: transform 0.6s ease;
+}
+.mood-day .lantern-glow {
+  --base: 0.45;
+}
+.mood-night .lantern-glow {
+  --base: 1;
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: calc(var(--base) * var(--strength) * 0.85);
+    transform: scale(1);
+  }
+  9% {
+    opacity: calc(var(--base) * var(--strength) * 0.97);
+  }
+  14% {
+    opacity: calc(var(--base) * var(--strength) * 0.78);
+    transform: scale(0.98);
+  }
+  33% {
+    opacity: calc(var(--base) * var(--strength) * 1);
+    transform: scale(1.02);
+  }
+  52% {
+    opacity: calc(var(--base) * var(--strength) * 0.86);
+  }
+  57% {
+    opacity: calc(var(--base) * var(--strength) * 0.95);
+  }
+  76% {
+    opacity: calc(var(--base) * var(--strength) * 0.82);
+    transform: scale(0.99);
+  }
+}
+
+.petal {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 1px 1px rgba(40, 10, 10, 0.3));
+}
+@keyframes petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  8% {
+    opacity: 0.95;
+  }
+  35% {
+    transform: translate(calc(var(--drift) * 0.25), calc(var(--fall) * 0.33)) rotate(calc(var(--spin) * 140deg));
+  }
+  65% {
+    transform: translate(calc(var(--drift) * 0.75), calc(var(--fall) * 0.66)) rotate(calc(var(--spin) * 260deg));
+  }
+  88% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), var(--fall)) rotate(calc(var(--spin) * 400deg));
+  }
+}
+
+/* invisible touch areas over painted details */
+.hotspot {
+  position: absolute;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 45%;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.hotspot:hover {
+  background: radial-gradient(ellipse at center, rgba(255, 220, 160, 0.1), rgba(255, 220, 160, 0) 70%);
+}
+
+/* objects sitting on the counter */
+.prop {
+  position: absolute;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  isolation: isolate;
+  transform: rotate(var(--rot, 0deg));
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.3, 1), filter 0.35s ease;
+}
+.prop img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 5px 4px rgba(25, 12, 6, 0.45));
+}
+.prop::after {
+  /* contact shadow on the counter */
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -3%;
+  height: 9%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(20, 9, 4, 0.55), rgba(20, 9, 4, 0) 70%);
+}
+.prop:hover {
+  transform: translateY(-3px) rotate(var(--rot, 0deg));
+  filter: brightness(1.05);
+}
+.prop.slip::after {
+  display: none;
+}
+
+/* the jar */
+.jar {
+  z-index: 3;
+}
+.jar img {
+  filter: drop-shadow(0 10px 10px rgba(20, 10, 4, 0.55));
+}
+.jar-glow {
+  position: absolute;
+  inset: -12% -16%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 55%, rgba(255, 210, 140, 0.45), rgba(214, 167, 94, 0.12) 45%, rgba(214, 167, 94, 0) 70%);
+  opacity: 0.35;
+  animation: jar-breathe 5s ease-in-out infinite;
+  transition: opacity 0.6s ease;
+}
+.jar:hover .jar-glow {
+  opacity: 0.85;
+}
+.jar.is-drawn .jar-glow {
+  animation: none;
+  opacity: 0.18;
+}
+.jar:hover {
+  transform: translateY(-4px);
+}
+@keyframes jar-breathe {
+  50% {
+    opacity: 0.6;
+  }
+}
+.jar-shaking {
+  animation: jar-shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+@keyframes jar-shake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  10% {
+    transform: translate(-2px, -3px) rotate(-2.4deg);
+  }
+  22% {
+    transform: translate(3px, -1px) rotate(2.2deg);
+  }
+  34% {
+    transform: translate(-3px, -2px) rotate(-1.8deg);
+  }
+  46% {
+    transform: translate(2px, 0) rotate(1.4deg);
+  }
+  60% {
+    transform: translate(-1px, -1px) rotate(-0.8deg);
+  }
+  75% {
+    transform: translate(1px, 0) rotate(0.4deg);
+  }
+}
+.jar-nudge {
+  animation: jar-nudge 0.6s ease;
+}
+@keyframes jar-nudge {
+  25% {
+    transform: rotate(-1.2deg);
+  }
+  60% {
+    transform: rotate(0.8deg);
+  }
+}
+.jar-beckon .jar-glow {
+  animation: jar-beckon 0.8s ease-in-out 3;
+}
+@keyframes jar-beckon {
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+.jar-hint {
+  position: absolute;
+  z-index: 4;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  font: 600 38px/1 var(--hand);
+  color: #f3e5c8;
+  white-space: nowrap;
+  text-shadow: 0 0 14px rgba(214, 167, 94, 0.7), 0 2px 3px rgba(20, 10, 5, 0.9);
+  animation: hint-bob 4s ease-in-out infinite;
+  transition: opacity 0.6s ease;
+}
+.jar-hint svg {
+  width: 46px;
+  height: 50px;
+  margin-top: 2px;
+  margin-left: 26px;
+  color: #f3e5c8;
+  filter: drop-shadow(0 1px 2px rgba(20, 10, 5, 0.85));
+}
+.jar-hint.is-drawn {
+  opacity: 0.8;
+  font-size: 32px;
+}
+.jar-hint.is-drawn svg {
+  visibility: hidden;
+}
+@keyframes hint-bob {
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+.has-ritual .jar-hint {
+  opacity: 0;
+}
+
+/* steam above the cup */
+.teacup .steam {
+  position: absolute;
+  left: 30%;
+  bottom: 68%;
+  width: 32%;
+  pointer-events: none;
+  overflow: visible;
+}
+.steam .wisp {
+  opacity: 0;
+  animation: wisp 7s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.steam .w2 {
+  animation-delay: -2.4s;
+}
+.steam .w3 {
+  animation-delay: -4.6s;
+}
+@keyframes wisp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scaleX(0.9);
+  }
+  30% {
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.25;
+    transform: translateY(-14px) scaleX(1.15) skewX(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scaleX(1.3) skewX(6deg);
+  }
+}
+.steam.puff .wisp {
+  animation-duration: 3.2s;
+  stroke-width: 9;
+}
+
+/* the cat */
+.cat {
+  z-index: 2;
+}
+.cat.wave-a {
+  animation: cat-bob-a 0.9s ease;
+}
+.cat.wave-b {
+  animation: cat-bob-b 0.9s ease;
+}
+@keyframes cat-bob-a {
+  30% {
+    transform: translateY(-8px) rotate(-4deg);
+  }
+  60% {
+    transform: translateY(0) rotate(3deg);
+  }
+}
+@keyframes cat-bob-b {
+  30% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+  60% {
+    transform: translateY(0) rotate(-3deg);
+  }
+}
+
+/* finishing layers over the whole painting */
+.paper-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 420px;
+  mix-blend-mode: overlay;
+  opacity: 0.32;
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 75% 70% at 50% 58%, rgba(20, 12, 8, 0) 55%, rgba(20, 12, 8, 0.6) 100%);
+}

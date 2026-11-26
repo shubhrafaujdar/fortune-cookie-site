@@ -1,0 +1,1461 @@
+{
+  "_readme": [
+    "The Little Fortune Shop: every fortune the jar can give.",
+    "signature: hand-written fortunes. Rare and Very Rare fortunes always come from here.",
+    "phrases: building blocks. The jar combines them into thousands of fortunes:",
+    "  A = subject + predicate + when      B = action + \", and \" + result      C = image + meaning",
+    "To add fortunes: add lines to the END of any list. Do not reorder or delete existing lines,",
+    "because saved journals remember fortunes by their position in these lists."
+  ],
+  "version": 1,
+  "signature": {
+    "luck": [
+      {
+        "text": "Somewhere, a door is already opening for you.",
+        "rarity": "common"
+      },
+      {
+        "text": "The coin you dropped long ago is still rolling toward something good.",
+        "rarity": "common"
+      },
+      {
+        "text": "Luck rarely knocks. It usually just leaves the window open.",
+        "rarity": "common"
+      },
+      {
+        "text": "The bus you missed was never yours. The next one knows your name.",
+        "rarity": "common"
+      },
+      {
+        "text": "A small yes is on its way, hidden inside an ordinary afternoon.",
+        "rarity": "common"
+      },
+      {
+        "text": "Today, the odds are leaning quietly in your direction.",
+        "rarity": "common"
+      },
+      {
+        "text": "Something you misplaced will turn up exactly when you stop looking.",
+        "rarity": "common"
+      },
+      {
+        "text": "The umbrella you nearly forgot will matter more than you think.",
+        "rarity": "common"
+      },
+      {
+        "text": "A lucky thing is easiest to see from a slower pace.",
+        "rarity": "common"
+      },
+      {
+        "text": "Keep a pocket empty this week. Something wants to fill it.",
+        "rarity": "common"
+      },
+      {
+        "text": "Good fortune prefers people who leave room for it.",
+        "rarity": "common"
+      },
+      {
+        "text": "The rain is not against you. It is watering what you planted.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A stranger will hand you something, and it will not be by accident.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Three small coincidences are a pattern. Follow the third one.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "What you call a near miss, the year will later call a turning point.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You are luckier than your worries have been telling you.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Some fortunes take seven days to arrive. Yours has already set out.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The cat at the counter has decided you are good luck. It is rarely wrong.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The thing you wished for once and forgot about has not forgotten you.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Few hands reach this paper. The shop has been saving it for you.",
+        "rarity": "very-rare"
+      }
+    ],
+    "friendship": [
+      {
+        "text": "Someone is thinking of you right now and smiling at the memory.",
+        "rarity": "common"
+      },
+      {
+        "text": "A friendship is a lantern two people agree to keep lit.",
+        "rarity": "common"
+      },
+      {
+        "text": "The friend who arrives late usually stays the longest.",
+        "rarity": "common"
+      },
+      {
+        "text": "You are someone’s favorite person to tell good news to.",
+        "rarity": "common"
+      },
+      {
+        "text": "Old friends are like old teacups: a little chipped, entirely irreplaceable.",
+        "rarity": "common"
+      },
+      {
+        "text": "Send the message you have been drafting in your head.",
+        "rarity": "common"
+      },
+      {
+        "text": "Somebody remembers a kindness you have long forgotten.",
+        "rarity": "common"
+      },
+      {
+        "text": "Good company can turn any bench into a fine place to be.",
+        "rarity": "common"
+      },
+      {
+        "text": "The quiet friend has been paying more attention than anyone.",
+        "rarity": "common"
+      },
+      {
+        "text": "A shared umbrella is worth more than a dry walk alone.",
+        "rarity": "common"
+      },
+      {
+        "text": "Laughter that comes easily is a sign you are among your people.",
+        "rarity": "common"
+      },
+      {
+        "text": "A friend you have not met yet already likes the same strange things you do.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Distance is just the space a friendship stretches into. It does not tear.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Someone will soon need exactly the thing you are good at.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Friendships are not measured in hours, but in how easily the silence sits.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You have been somebody’s shelter more often than you know.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "An old thread between you and someone far away is about to be pulled gently.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Bring two cups next time. Someone is on their way.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The people who stay through the ordinary days are the rarest of all.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Long ago, someone wished they would meet a person like you. It worked.",
+        "rarity": "very-rare"
+      }
+    ],
+    "love": [
+      {
+        "text": "Love often arrives disguised as a very ordinary conversation.",
+        "rarity": "common"
+      },
+      {
+        "text": "Be as gentle with yourself as you are with the people you love.",
+        "rarity": "common"
+      },
+      {
+        "text": "The heart keeps a better calendar than the mind.",
+        "rarity": "common"
+      },
+      {
+        "text": "Somewhere, a song reminds someone of you.",
+        "rarity": "common"
+      },
+      {
+        "text": "Small attentions, repeated, become a kind of devotion.",
+        "rarity": "common"
+      },
+      {
+        "text": "Love does not need to shout. It is happy to simply stay.",
+        "rarity": "common"
+      },
+      {
+        "text": "What you give freely has a way of finding its way home.",
+        "rarity": "common"
+      },
+      {
+        "text": "Warm tea, a kind word, a hand held a moment longer. That is enough.",
+        "rarity": "common"
+      },
+      {
+        "text": "Be open to the person who makes you laugh at the wrong moment.",
+        "rarity": "common"
+      },
+      {
+        "text": "The right person will think your quiet parts are the best parts.",
+        "rarity": "common"
+      },
+      {
+        "text": "There is someone who would walk through the rain just to hear your news.",
+        "rarity": "common"
+      },
+      {
+        "text": "A love worth keeping makes you more like yourself, not less.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The thing you are most afraid to say is the thing they hope to hear.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A letter you never sent still did its work on you.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Your heart has been mending in the background, like a kettle slowly warming.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You will be loved for the very thing you once tried to hide.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Two umbrellas will soon become one. Do not be surprised.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The longest love stories begin with someone noticing a small detail.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Somebody kept something you gave them, and they look at it often.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The red thread is real. It is shorter than you think.",
+        "rarity": "very-rare"
+      }
+    ],
+    "courage": [
+      {
+        "text": "Not every detour takes you farther from where you belong.",
+        "rarity": "common"
+      },
+      {
+        "text": "Brave does not mean unafraid. It means you went anyway.",
+        "rarity": "common"
+      },
+      {
+        "text": "The first step is usually smaller than the one you are imagining.",
+        "rarity": "common"
+      },
+      {
+        "text": "Your voice is steadier than it sounds from the inside.",
+        "rarity": "common"
+      },
+      {
+        "text": "Courage can be as quiet as getting up again tomorrow.",
+        "rarity": "common"
+      },
+      {
+        "text": "You have survived every one of your hardest days so far.",
+        "rarity": "common"
+      },
+      {
+        "text": "A closed door is still a door. Knock once more.",
+        "rarity": "common"
+      },
+      {
+        "text": "Say the true thing kindly, and let it land where it may.",
+        "rarity": "common"
+      },
+      {
+        "text": "Fear is a lantern held too close. Step back and it becomes light.",
+        "rarity": "common"
+      },
+      {
+        "text": "The road looks steepest from the bottom. Look again from halfway.",
+        "rarity": "common"
+      },
+      {
+        "text": "Let yourself be a beginner at something. It is a gentle kind of bravery.",
+        "rarity": "common"
+      },
+      {
+        "text": "The mountain does not mind how slowly you climb it.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Someone is watching you try, and it is giving them courage too.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You are allowed to change your mind and walk a different path.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Storms pass over roofs that hold. Yours is holding.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The tremble in your hands is just the sound of something mattering.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The version of you from five years ago would be astonished by today.",
+        "rarity": "rare"
+      },
+      {
+        "text": "A small, brave act this week will echo further than you expect.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The bamboo bends in the storm and is still standing at sunrise.",
+        "rarity": "rare"
+      },
+      {
+        "text": "You were made for at least one moment that requires exactly this courage.",
+        "rarity": "very-rare"
+      }
+    ],
+    "creativity": [
+      {
+        "text": "The smallest beginnings often carry the longest stories.",
+        "rarity": "common"
+      },
+      {
+        "text": "Make something badly first. Beauty arrives on the second try.",
+        "rarity": "common"
+      },
+      {
+        "text": "Your odd idea is the one worth keeping.",
+        "rarity": "common"
+      },
+      {
+        "text": "A blank page is just a quiet room waiting for a guest.",
+        "rarity": "common"
+      },
+      {
+        "text": "Inspiration enjoys a slow walk. Take it somewhere new.",
+        "rarity": "common"
+      },
+      {
+        "text": "Copy the masters once, then make the mistake that is only yours.",
+        "rarity": "common"
+      },
+      {
+        "text": "Keep a notebook nearby. Tonight’s dream wants to be written down.",
+        "rarity": "common"
+      },
+      {
+        "text": "Your hands know things your mind has not figured out yet.",
+        "rarity": "common"
+      },
+      {
+        "text": "A little boredom is the soil where ideas grow.",
+        "rarity": "common"
+      },
+      {
+        "text": "Finish the small thing. It will teach you how to finish the big one.",
+        "rarity": "common"
+      },
+      {
+        "text": "Steal a color from the evening sky. No one will mind.",
+        "rarity": "common"
+      },
+      {
+        "text": "The thing you made and set aside deserves a second look.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The best ideas arrive while you are doing the dishes. Let them.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You do not need permission to make something beautiful.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Somewhere, a stranger will be comforted by something you create.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Rain on a window is a kind of music. Listen for the melody.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "What you are building slowly is going to outlast what others build quickly.",
+        "rarity": "rare"
+      },
+      {
+        "text": "An unfinished sketch of yours holds the start of something remarkable.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Make the thing you wished existed. Someone else has been wishing too.",
+        "rarity": "rare"
+      },
+      {
+        "text": "A small piece of your imagination is going to travel very far.",
+        "rarity": "very-rare"
+      }
+    ],
+    "beginnings": [
+      {
+        "text": "Every morning is a page that has never been written on.",
+        "rarity": "common"
+      },
+      {
+        "text": "You do not need a new year to begin again. A Tuesday will do.",
+        "rarity": "common"
+      },
+      {
+        "text": "Plant the seed even if you will not see the tree.",
+        "rarity": "common"
+      },
+      {
+        "text": "The first cup of tea is always the most honest.",
+        "rarity": "common"
+      },
+      {
+        "text": "A fresh start can be as simple as opening a window.",
+        "rarity": "common"
+      },
+      {
+        "text": "Something is ending so that something kinder can arrive.",
+        "rarity": "common"
+      },
+      {
+        "text": "Begin where you are. It is the only place anyone ever begins.",
+        "rarity": "common"
+      },
+      {
+        "text": "A new chapter does not erase the old ones. It builds on them.",
+        "rarity": "common"
+      },
+      {
+        "text": "Pack lightly. The new road will give you what you need.",
+        "rarity": "common"
+      },
+      {
+        "text": "The blossoms do not apologize for arriving late in the spring.",
+        "rarity": "common"
+      },
+      {
+        "text": "Change usually arrives quietly, while you are looking the other way.",
+        "rarity": "common"
+      },
+      {
+        "text": "The path ahead is unfamiliar because it is yours, not someone else’s.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A small decision this month will turn out to be the first step of a long journey.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "You are allowed to outgrow places that once fit you perfectly.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The key to the next door is already in your pocket.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Every ending is a hallway, and hallways lead to rooms.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The season you are entering will feel like coming home to yourself.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Someone you will meet this year is going to change your direction for the better.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The tide is turning. You will notice it first in small things.",
+        "rarity": "rare"
+      },
+      {
+        "text": "This is the beginning you will tell stories about one day.",
+        "rarity": "very-rare"
+      }
+    ],
+    "wisdom": [
+      {
+        "text": "You may find what you need in a place you almost overlooked.",
+        "rarity": "common"
+      },
+      {
+        "text": "Steep slowly. The best flavors take their time.",
+        "rarity": "common"
+      },
+      {
+        "text": "Not every question needs an answer today.",
+        "rarity": "common"
+      },
+      {
+        "text": "The river does not push. It simply keeps going.",
+        "rarity": "common"
+      },
+      {
+        "text": "When in doubt, drink some water and go to bed early.",
+        "rarity": "common"
+      },
+      {
+        "text": "Listen twice as long as you speak, and you will hear what is unsaid.",
+        "rarity": "common"
+      },
+      {
+        "text": "Patience is just hope that has learned to sit down.",
+        "rarity": "common"
+      },
+      {
+        "text": "A cluttered mind is like a cloudy pot of tea. Let it settle.",
+        "rarity": "common"
+      },
+      {
+        "text": "Sometimes the kindest answer is a good question.",
+        "rarity": "common"
+      },
+      {
+        "text": "The moon does not compete with the lanterns. It simply shines.",
+        "rarity": "common"
+      },
+      {
+        "text": "You already know the answer. You are only waiting to be sure.",
+        "rarity": "common"
+      },
+      {
+        "text": "The things that worry you at night are smaller in the morning light.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A crack in the bowl is where the gold goes.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Rest is not the opposite of progress. It is part of it.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "What is meant for you will not need to be chased.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Even a slow walk eventually reaches the top of the hill.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The teacup is useful because it is empty. Make a little space.",
+        "rarity": "rare"
+      },
+      {
+        "text": "You have learned more this year than any book could have taught you.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The mountain is not in a hurry, and still it reaches the clouds.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Whatever you are carrying, you are allowed to set it down for a while.",
+        "rarity": "very-rare"
+      }
+    ],
+    "surprises": [
+      {
+        "text": "A pleasant surprise is hiding in an ordinary week.",
+        "rarity": "common"
+      },
+      {
+        "text": "Check your coat pockets. Something small and good is waiting.",
+        "rarity": "common"
+      },
+      {
+        "text": "A song you have not heard in years will find you soon.",
+        "rarity": "common"
+      },
+      {
+        "text": "The next envelope you open will make you smile.",
+        "rarity": "common"
+      },
+      {
+        "text": "Something you thought was lost is only taking the long way home.",
+        "rarity": "common"
+      },
+      {
+        "text": "An unexpected guest will bring exactly the right conversation.",
+        "rarity": "common"
+      },
+      {
+        "text": "Look up tonight. The sky has arranged something for you.",
+        "rarity": "common"
+      },
+      {
+        "text": "A detour on your usual walk will reveal a hidden garden.",
+        "rarity": "common"
+      },
+      {
+        "text": "You will taste something new and wonder where it has been all your life.",
+        "rarity": "common"
+      },
+      {
+        "text": "A small kindness from a stranger will brighten a gray day.",
+        "rarity": "common"
+      },
+      {
+        "text": "Somebody is about to say something that changes your mind entirely.",
+        "rarity": "common"
+      },
+      {
+        "text": "The rain will stop at precisely the right moment.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A dusty box holds something you will be glad to have kept.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "Your name will be mentioned somewhere good, and you may never know it.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "The thing you dread on the calendar will turn out to be the highlight.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "A door you walk past every day is worth opening once.",
+        "rarity": "uncommon"
+      },
+      {
+        "text": "An old wish is folding itself into something better than you asked for.",
+        "rarity": "rare"
+      },
+      {
+        "text": "The fortune you were meant to get was this one. The jar insisted.",
+        "rarity": "rare"
+      },
+      {
+        "text": "A small mystery will be solved, and the answer will be lovely.",
+        "rarity": "rare"
+      },
+      {
+        "text": "Tonight the shopkeeper left a lantern burning just for you. Look closely.",
+        "rarity": "very-rare"
+      }
+    ]
+  },
+  "phrases": {
+    "when": [
+      "before the moon is full",
+      "on an ordinary afternoon",
+      "when you least expect it",
+      "sooner than you think",
+      "after the next rain",
+      "before the season turns",
+      "on a day that starts like any other",
+      "while the kettle is still warming",
+      "somewhere between now and spring",
+      "by the end of this week",
+      "in the quiet after a long day",
+      "on your way to somewhere else",
+      "just as you stop waiting",
+      "under a soft gray sky",
+      "at the very moment it is needed",
+      "when the lanterns are lit",
+      "on a morning you almost slept through",
+      "in the middle of something small",
+      "once you take the first step",
+      "after one more patient night",
+      "when you finally slow down",
+      "on a street you rarely walk",
+      "at the turning of the year",
+      "before the last leaf falls"
+    ],
+    "images": [
+      "The tea leaves settle when no one is watching.",
+      "Rain does not hurry, yet it fills every river.",
+      "The moon is never late, only patient.",
+      "A kettle sings only once the water is ready.",
+      "Plum blossoms open in the cold before anyone expects them.",
+      "The river carves stone without ever raising its voice.",
+      "Lanterns are lit one at a time.",
+      "Snow melts from the edges first.",
+      "A single cup of tea can warm both hands.",
+      "Bamboo grows roots for years before it rises.",
+      "The tide goes out so that it can come back in.",
+      "Moss grows best where it is left alone.",
+      "A paper crane begins as a single fold.",
+      "Even the longest rain ends in a puddle full of sky.",
+      "The cat sleeps in whatever patch of sun it finds.",
+      "Seeds do not argue with the season.",
+      "Morning fog lifts without being asked.",
+      "An old teapot pours best after years of use.",
+      "The stars were there all day; it simply took the dark to see them.",
+      "The heron waits so long that the river forgets it is there."
+    ],
+    "categories": {
+      "luck": {
+        "subjects": [
+          "A coin you forgot about",
+          "A small piece of good news",
+          "The lucky break you stopped hoping for",
+          "A door that seemed locked",
+          "An unexpected letter",
+          "A green light at every crossing",
+          "The thing you misplaced",
+          "A stroke of quiet luck",
+          "A favor you once did",
+          "A chance encounter",
+          "The number you keep noticing",
+          "An invitation you nearly declined",
+          "Something left on your doorstep",
+          "A wish you made years ago",
+          "The last seat on the train",
+          "A small window of opportunity",
+          "A lucky umbrella",
+          "A four-leaf clover of a moment"
+        ],
+        "predicates": [
+          "will turn up right where you need it",
+          "will find its way back to you",
+          "will open with the gentlest push",
+          "will land softly in your hands",
+          "will make an ordinary day shine",
+          "will tip the odds in your favor",
+          "will arrive dressed as an inconvenience",
+          "will repay you twice over",
+          "will lead you somewhere wonderful",
+          "will be waiting at the next corner",
+          "will change the shape of your week",
+          "will surprise even the shop cat",
+          "will knock quietly at your door",
+          "will cost you nothing and give you plenty",
+          "will make you laugh out loud",
+          "will remind you how lucky you are",
+          "will show up wearing a familiar face",
+          "will be more generous than you expect"
+        ],
+        "actions": [
+          "Leave the window open a little tonight",
+          "Pick up the coin, even if it is a small one",
+          "Say yes to the second invitation",
+          "Take the long way home",
+          "Keep one pocket empty this week",
+          "Trust the odd coincidence",
+          "Wear the thing that makes you smile",
+          "Wait one more minute at the crossing",
+          "Buy the flowers on a whim",
+          "Write your wish on a slip of paper",
+          "Turn left where you usually turn right",
+          "Hold the door for a stranger",
+          "Carry an umbrella you do not need",
+          "Tap the lucky cat on your way out",
+          "Look twice at the ordinary",
+          "Let one small plan fall through"
+        ],
+        "results": [
+          "luck will know where to find you",
+          "something good will fit into the space",
+          "the odds will quietly shift",
+          "a small fortune will follow you home",
+          "the day will return the favor",
+          "you may stumble onto something golden",
+          "good timing will be on your side",
+          "a happy accident will be waiting",
+          "the universe tends to notice such things",
+          "fortune will favor that kind of gentleness",
+          "you will be glad you did",
+          "a lucky thread will begin to unspool",
+          "the next surprise will be a kind one",
+          "good things will gather like rain in a cup",
+          "your luck will start to hum",
+          "the right moment will open like a flower"
+        ],
+        "meanings": [
+          "Your luck works the same way.",
+          "Good fortune is like that, too.",
+          "So it is with the luck coming toward you.",
+          "Trust that your luck keeps the same time.",
+          "Your good fortune is closer than it looks.",
+          "Luck likes that kind of patience.",
+          "Let your luck arrive in its own way.",
+          "Something lucky is unfolding just like this.",
+          "The best luck often looks like this at first.",
+          "Your next lucky turn is already on its way.",
+          "Fortune keeps its promises in this quiet manner.",
+          "Luck has not forgotten your address.",
+          "Small chances add up in exactly this way.",
+          "That is how lucky days begin.",
+          "Your luck is simply gathering itself.",
+          "Keep the door open; luck will do the rest."
+        ]
+      },
+      "friendship": {
+        "subjects": [
+          "An old friend",
+          "Someone you met only once",
+          "A friend who lives far away",
+          "The person who laughs at your jokes",
+          "A kind neighbor",
+          "Someone who has missed you",
+          "A new friend",
+          "A friend from long ago",
+          "The quiet one in the group",
+          "A kindred spirit",
+          "Someone you helped once",
+          "A pen pal you have not met yet",
+          "The friend who always brings snacks",
+          "Someone across the room",
+          "A stranger with a kind face",
+          "Somebody who remembers your birthday"
+        ],
+        "predicates": [
+          "will reach out to you",
+          "will need exactly your kind of kindness",
+          "will make you laugh until you cry",
+          "will send you a message worth keeping",
+          "will think of you and smile",
+          "will save you the good seat",
+          "will remind you who you are",
+          "will be glad they met you",
+          "will knock on your door with good news",
+          "will share an umbrella with you",
+          "will become someone you cannot imagine life without",
+          "will understand without needing an explanation",
+          "will return a kindness you had forgotten",
+          "will ask about your day and truly listen",
+          "will invite you somewhere wonderful",
+          "will turn an ordinary walk into a story"
+        ],
+        "actions": [
+          "Send the message you have been drafting in your head",
+          "Make an extra cup of tea",
+          "Ask how they really are",
+          "Say the compliment out loud",
+          "Write a letter by hand",
+          "Forgive the small thing",
+          "Save a seat for someone new",
+          "Share the last cookie",
+          "Remember the name of someone you just met",
+          "Call the friend you keep thinking about",
+          "Laugh at the joke even if you have heard it",
+          "Show up, even for a few minutes",
+          "Listen a little longer than usual",
+          "Return the borrowed book",
+          "Bring two umbrellas tomorrow",
+          "Admit that you miss them"
+        ],
+        "results": [
+          "a friendship will grow warmer for it",
+          "someone will feel less alone",
+          "the circle of people around you will widen",
+          "you will be remembered kindly",
+          "an old bond will feel new again",
+          "the reply will make your day",
+          "someone will carry that kindness forward",
+          "you will find your people a little closer",
+          "a quiet friendship will begin to bloom",
+          "the conversation will be worth the wait",
+          "you will both feel lighter",
+          "it will mean more than you know",
+          "your table will be fuller next time",
+          "someone will start saving a seat for you, too",
+          "the distance between you will shrink",
+          "you will hear laughter you have missed"
+        ],
+        "meanings": [
+          "Friendship grows like that, too.",
+          "So do the people who love you.",
+          "Good friends work in the same quiet way.",
+          "Your friendships are doing the same.",
+          "That is how the best friendships begin.",
+          "Someone is caring for you just like this.",
+          "Let your friendships take their time.",
+          "The right people arrive in much the same way.",
+          "Old friendships deepen in exactly this manner.",
+          "Trust the people who stay through the slow parts.",
+          "Kindness between friends moves like this.",
+          "A friend is finding their way to you just so.",
+          "Give your friendships the same patience.",
+          "Connection keeps its own gentle schedule.",
+          "You are part of someone’s quiet good fortune, too.",
+          "Friends who matter tend to arrive this way."
+        ]
+      },
+      "love": {
+        "subjects": [
+          "A love that feels like home",
+          "Someone who notices the little things",
+          "A tender word",
+          "The person meant for you",
+          "A gentle heart",
+          "A long-awaited conversation",
+          "A kind of love you did not expect",
+          "Someone with a soft laugh",
+          "A love letter",
+          "A hand to hold",
+          "Someone who listens closely",
+          "The warmth you have been missing",
+          "A shy admirer",
+          "A small romantic gesture",
+          "Someone across a crowded room",
+          "A love worth waiting for"
+        ],
+        "predicates": [
+          "will find you",
+          "will grow quietly, like a plant on a windowsill",
+          "will make the rain feel romantic",
+          "will remind you how soft the world can be",
+          "will arrive without any fuss",
+          "will choose you on purpose",
+          "will feel like the first warm day of spring",
+          "will stay close through something hard",
+          "will mend what you thought was broken",
+          "will make an ordinary evening glow",
+          "will speak the words you need to hear",
+          "will surprise your careful heart",
+          "will stay longer than you dared to hope",
+          "will make your tea taste sweeter",
+          "will see you exactly as you are",
+          "will turn a small moment into a memory"
+        ],
+        "actions": [
+          "Say what you feel, even if your voice shakes",
+          "Be as gentle with yourself as with others",
+          "Leave a note where someone will find it",
+          "Let someone see the real you",
+          "Notice who makes you laugh",
+          "Hold the door open for love",
+          "Write down what you adore about someone",
+          "Stay for one more cup of tea",
+          "Answer with your heart this once",
+          "Forgive yourself for the old heartbreak",
+          "Ask the question you have been saving",
+          "Make room for someone new",
+          "Share your umbrella",
+          "Love the small habits of the people near you",
+          "Tell someone they matter",
+          "Walk slowly together when you can"
+        ],
+        "results": [
+          "love will feel safer to arrive",
+          "your heart will thank you",
+          "something tender will bloom",
+          "someone will hold that moment for years",
+          "the warmth will come back to you",
+          "you will be loved more clearly",
+          "a soft kind of happiness will follow",
+          "the right person will recognize you",
+          "a closeness will grow between you",
+          "romance will find its way in",
+          "you will feel more at home in your own life",
+          "the answer may be sweeter than you think",
+          "love will meet you halfway",
+          "your days will feel a little brighter",
+          "someone will start counting on that kindness",
+          "the evening will feel like a story"
+        ],
+        "meanings": [
+          "Love grows the same way.",
+          "So does the love meant for you.",
+          "Your heart is mending just like this.",
+          "Love keeps that kind of patient time.",
+          "That is how real tenderness arrives.",
+          "Someone’s love for you is growing like this.",
+          "Let your heart move at that pace.",
+          "The right love does not need to rush either.",
+          "Affection deepens in exactly this way.",
+          "Your heart already knows this rhythm.",
+          "Gentle love behaves the same way.",
+          "A love story is unfolding just as slowly.",
+          "Trust the quiet way love works.",
+          "Love will find you in much the same manner.",
+          "The heart blooms on its own schedule, too.",
+          "Every lasting love begins this way."
+        ]
+      },
+      "courage": {
+        "subjects": [
+          "A braver version of you",
+          "The first small step",
+          "Your steady voice",
+          "The fear you are carrying",
+          "A hard conversation",
+          "The mountain in front of you",
+          "Your quiet strength",
+          "A risk worth taking",
+          "The door you are afraid to open",
+          "Your stubborn hope",
+          "The person you are becoming",
+          "A shaking hand",
+          "The storm you are walking through",
+          "A choice only you can make",
+          "Your inner lantern",
+          "The question you are afraid to ask"
+        ],
+        "predicates": [
+          "will carry you farther than you think",
+          "will turn out smaller than it looked",
+          "will make room for something better",
+          "will surprise the people who doubted you",
+          "will open onto a wider road",
+          "will get easier with every step",
+          "will teach you what you are made of",
+          "will be met with more kindness than you fear",
+          "will hold steady when it matters",
+          "will lead you somewhere you belong",
+          "will become a story you tell proudly",
+          "will give someone else courage, too",
+          "will light the way through the dark part",
+          "will feel lighter once you begin",
+          "will be worth the trembling",
+          "will show you how strong you have been all along"
+        ],
+        "actions": [
+          "Take the first step before you feel ready",
+          "Say no where you mean no",
+          "Speak up once, kindly and clearly",
+          "Try the thing you might fail at",
+          "Ask for help without apologizing",
+          "Walk into the room as if you belong there",
+          "Let yourself be a beginner",
+          "Finish what you were afraid to start",
+          "Raise your hand",
+          "Leave what no longer fits you",
+          "Admit what you really want",
+          "Send the application",
+          "Rest, and then try again",
+          "Stand by your quiet decision",
+          "Look the worry in the eye",
+          "Do one brave thing before lunch"
+        ],
+        "results": [
+          "the path will appear beneath your feet",
+          "your courage will grow to match it",
+          "the fear will lose its loudest voice",
+          "you will stand a little taller tomorrow",
+          "the world will make room for you",
+          "you will surprise yourself",
+          "the hard part will pass sooner than you think",
+          "someone will be inspired by you",
+          "the next step will feel lighter",
+          "you will find you were never as alone as you thought",
+          "a new door will swing open",
+          "your confidence will start to bloom",
+          "the mountain will begin to look like a hill",
+          "you will be proud of the one who did it",
+          "the storm will start to clear",
+          "the brave part of you will wake up"
+        ],
+        "meanings": [
+          "Courage works the same way.",
+          "So does the bravery inside you.",
+          "Your strength is growing just like this.",
+          "Being brave rarely needs to be loud.",
+          "That is how quiet courage looks.",
+          "Your courage keeps that patient pace.",
+          "Let your bravery take its time.",
+          "Small brave steps add up the same way.",
+          "You are stronger than this moment, too.",
+          "Fear fades in much the same manner.",
+          "Your resolve is gathering just so.",
+          "Trust that your strength is still rising.",
+          "The bravest people move like this.",
+          "The hard season will turn in this way.",
+          "Your steadiness matters more than your speed.",
+          "Courage often begins this quietly."
+        ]
+      },
+      "creativity": {
+        "subjects": [
+          "An idea scribbled on a napkin",
+          "The half-finished project",
+          "A strange little idea",
+          "Your next creation",
+          "A color you have never used",
+          "The song stuck in your head",
+          "A sketch you almost threw away",
+          "A daydream",
+          "The blank page",
+          "Your curious hands",
+          "A new way of seeing",
+          "The story only you can tell",
+          "A spark of inspiration",
+          "The mistake on your canvas",
+          "A tune you hum without thinking",
+          "Your notebook"
+        ],
+        "predicates": [
+          "will become something beautiful",
+          "will open a door in your imagination",
+          "will lead you to your best work yet",
+          "will delight someone you have never met",
+          "will find its finishing touch",
+          "will be worth all the false starts",
+          "will teach you a new trick",
+          "will grow wings if you let it",
+          "will turn out better than the plan",
+          "will make the world a little more interesting",
+          "will arrive in full color",
+          "will remind you why you love to make things",
+          "will travel farther than you imagine",
+          "will connect two ideas you never paired",
+          "will want to be shared",
+          "will start to feel like yours"
+        ],
+        "actions": [
+          "Make something badly on purpose",
+          "Keep a notebook by the bed",
+          "Finish the small piece first",
+          "Borrow a color from the evening sky",
+          "Take a walk without your phone",
+          "Make a mess and leave it overnight",
+          "Show the unfinished version to someone kind",
+          "Try the tool you have never touched",
+          "Draw what you see out the window",
+          "Write one honest sentence",
+          "Rearrange something that has always been the same",
+          "Copy a master once, then break the rules",
+          "Follow the odd idea for ten minutes",
+          "Hum while you work",
+          "Give yourself permission to play",
+          "Make it for no one but yourself"
+        ],
+        "results": [
+          "the next idea will arrive easily",
+          "your hands will remember what your mind forgot",
+          "something surprising will emerge",
+          "inspiration will start to visit more often",
+          "the work will begin to sound like you",
+          "the stuck part will loosen",
+          "you will find a beginning you like",
+          "a small masterpiece may slip out",
+          "the muse will pull up a chair",
+          "your imagination will stretch a little wider",
+          "the work will reward your patience",
+          "joy will find its way into the process",
+          "you will see an old problem in a new light",
+          "creativity will feel like play again",
+          "the right shape will reveal itself",
+          "you will make something only you could make"
+        ],
+        "meanings": [
+          "Creativity grows the same way.",
+          "So does your next good idea.",
+          "Your imagination is working just like this.",
+          "Art keeps the same patient time.",
+          "That is how real inspiration arrives.",
+          "Your best work is gathering in this way.",
+          "Let your ideas take their time.",
+          "Every masterpiece begins like that.",
+          "The creative mind works quietly, too.",
+          "Your craft is deepening just so.",
+          "Making things asks for the same patience.",
+          "An idea of yours is unfolding like this.",
+          "Trust the slow part of making.",
+          "Inspiration rarely announces itself either.",
+          "Your creativity is not lost, only resting.",
+          "Small creative acts add up the same way."
+        ]
+      },
+      "beginnings": {
+        "subjects": [
+          "A fresh start",
+          "A new chapter",
+          "The road ahead",
+          "Tomorrow morning",
+          "A blank calendar page",
+          "A new season in your life",
+          "The change you are nervous about",
+          "An unfamiliar path",
+          "The first day of something",
+          "A small decision",
+          "The move you have been considering",
+          "The next door",
+          "A new habit",
+          "A clean slate",
+          "The key you are holding",
+          "The version of you just beginning"
+        ],
+        "predicates": [
+          "will feel like home sooner than you expect",
+          "will bring the light you have been missing",
+          "will open wider than you planned",
+          "will make the old worries feel small",
+          "will lead to people you have yet to meet",
+          "will be kinder than you fear",
+          "will teach you to trust yourself again",
+          "will turn out to be exactly right",
+          "will carry you somewhere new and good",
+          "will grow into something lasting",
+          "will give you room to breathe",
+          "will begin quietly and end beautifully",
+          "will be worth the leap",
+          "will fit you better than the last one",
+          "will mark the start of a good story",
+          "will open onto blue sky"
+        ],
+        "actions": [
+          "Clear one small corner of your room",
+          "Write down where you want to be",
+          "Say goodbye to what is finished",
+          "Pack lightly for the next part",
+          "Wake up a little earlier tomorrow",
+          "Begin before everything is perfect",
+          "Open the window and let fresh air in",
+          "Try one new thing this week",
+          "Let the old chapter close gently",
+          "Plant something, even something small",
+          "List what you will carry forward",
+          "Choose one habit to start today",
+          "Walk a route you have never taken",
+          "Give away what you have outgrown",
+          "Thank the past and turn the page",
+          "Start with a single cup of tea"
+        ],
+        "results": [
+          "the new path will start to appear",
+          "you will feel the change begin",
+          "space will open for something wonderful",
+          "tomorrow will feel lighter",
+          "the next chapter will greet you warmly",
+          "fresh air will find you",
+          "a quiet beginning will take root",
+          "momentum will gather on its own",
+          "you will find you are already on your way",
+          "the future will feel less like a stranger",
+          "good change will follow",
+          "you will recognize yourself in the new season",
+          "the first page will be easy to write",
+          "the road will meet you halfway",
+          "your new start will hold steady",
+          "the beginning will be its own reward"
+        ],
+        "meanings": [
+          "New beginnings arrive the same way.",
+          "So does the change ahead of you.",
+          "Your fresh start is unfolding like this.",
+          "Every beginning keeps this patient time.",
+          "That is how good changes take root.",
+          "Your next chapter is forming just so.",
+          "Let the new season come at its own pace.",
+          "Change is gentle like that, too.",
+          "Beginnings rarely make noise either.",
+          "Your future is gathering in this way.",
+          "The new road opens in much the same way.",
+          "Trust that the turning has already started.",
+          "Something new is growing in you just like this.",
+          "Starting over can be this quiet.",
+          "The next step is already being prepared.",
+          "Fresh starts work in the same way."
+        ]
+      },
+      "wisdom": {
+        "subjects": [
+          "The answer you are seeking",
+          "A quiet moment",
+          "The lesson in this season",
+          "Your own intuition",
+          "A question left unanswered",
+          "Patience",
+          "An old proverb",
+          "The slower path",
+          "A long walk",
+          "Your first instinct",
+          "A mistake from the past",
+          "The silence between words",
+          "An elder’s advice",
+          "A night of good sleep",
+          "The thing you keep noticing",
+          "A cup of tea taken slowly"
+        ],
+        "predicates": [
+          "will make more sense in the morning",
+          "will teach you more than any book",
+          "will show you what truly matters",
+          "will reveal itself when you stop forcing it",
+          "will turn out to be wiser than it seemed",
+          "will guide you better than worry can",
+          "will bring clarity, like settling water",
+          "will remind you of what you already know",
+          "will help you see the bigger picture",
+          "will soften a hard decision",
+          "will lead you back to yourself",
+          "will make the next step clear",
+          "will be worth the waiting",
+          "will untangle the knot you are holding",
+          "will settle a restless thought",
+          "will point you gently in the right direction"
+        ],
+        "actions": [
+          "Sleep on the decision",
+          "Ask one more question before you answer",
+          "Listen twice as long as you speak",
+          "Drink some water and rest",
+          "Write the worry down and close the notebook",
+          "Take the slower road this once",
+          "Let the tea steep a little longer",
+          "Sit quietly for five minutes",
+          "Ask someone older for their story",
+          "Do the kind thing before the clever thing",
+          "Let go of the argument you do not need to win",
+          "Watch the rain for a while",
+          "Count what you already have",
+          "Admit what you do not know",
+          "Tidy one small thing before the big one",
+          "Notice your breathing"
+        ],
+        "results": [
+          "the answer will rise like a leaf to the surface",
+          "you will see more clearly",
+          "wisdom will meet you halfway",
+          "the noise will settle",
+          "your choice will feel steadier",
+          "peace will make itself at home",
+          "the next step will become obvious",
+          "you will learn something worth keeping",
+          "the knot will loosen on its own",
+          "you will be glad of your patience",
+          "understanding will arrive gently",
+          "your mind will feel like a clear sky",
+          "the important will separate from the urgent",
+          "you will hear your own good sense",
+          "the path will seem less steep",
+          "calm will become your best adviser"
+        ],
+        "meanings": [
+          "Wisdom works the same way.",
+          "So does understanding.",
+          "Your clarity is arriving just like this.",
+          "Insight keeps the same patient time.",
+          "That is how true answers come.",
+          "The truth settles in the same way.",
+          "Let your thoughts take their time.",
+          "Good judgment grows just so.",
+          "Peace of mind behaves like that, too.",
+          "Your understanding is deepening this way.",
+          "The wise rarely hurry either.",
+          "Learning unfolds in much the same manner.",
+          "Trust what grows slowly in you.",
+          "The answer is already settling.",
+          "Quiet knowing arrives like this.",
+          "Good sense and patience walk together the same way."
+        ]
+      },
+      "surprises": {
+        "subjects": [
+          "A pleasant surprise",
+          "An unexpected guest",
+          "A forgotten treasure",
+          "A letter in familiar handwriting",
+          "A strange coincidence",
+          "A gift wrapped in plain paper",
+          "A song you have not heard in years",
+          "A message from someone surprising",
+          "A rainbow",
+          "A hidden garden",
+          "A small mystery",
+          "An invitation out of the blue",
+          "A twist in your week",
+          "A delicious discovery",
+          "A secret someone kept for you",
+          "A familiar face in an unfamiliar place"
+        ],
+        "predicates": [
+          "will brighten your week",
+          "will make you smile all day",
+          "will be waiting where you leave your keys",
+          "will knock at the perfect moment",
+          "will turn out better than you could have planned",
+          "will leave you delighted",
+          "will change your plans for the better",
+          "will make a gray day sparkle",
+          "will be the best part of your week",
+          "will lead to a story worth retelling",
+          "will appear right where you least expect it",
+          "will feel like it was meant to be",
+          "will make you laugh out loud",
+          "will reveal something lovely",
+          "will arrive with perfect timing",
+          "will remind you that life is still full of wonders"
+        ],
+        "actions": [
+          "Check your coat pockets",
+          "Say yes to the unplanned afternoon",
+          "Open the drawer you never open",
+          "Look up at the sky tonight",
+          "Try the dish you cannot pronounce",
+          "Take a different route home",
+          "Answer the knock with a smile",
+          "Leave room in your schedule",
+          "Peek inside the old box",
+          "Ask a stranger about their favorite book",
+          "Follow the smell of something baking",
+          "Read the last page of today’s paper",
+          "Linger at the shop window",
+          "Accept the invitation",
+          "Turn the page you were going to skip",
+          "Wander a little"
+        ],
+        "results": [
+          "something delightful will be waiting",
+          "the day will take a lovely turn",
+          "you will find a small treasure",
+          "a surprise will tap you on the shoulder",
+          "the ordinary will start to shimmer",
+          "you will collect a story worth telling",
+          "something unexpected will make you grin",
+          "a happy coincidence will follow",
+          "the week will reveal a hidden gift",
+          "you will discover a new favorite thing",
+          "wonder will find its way in",
+          "the afternoon will surprise you",
+          "a little magic will show up",
+          "you will be glad you looked",
+          "the unexpected will be kind",
+          "something will sparkle that did not before"
+        ],
+        "meanings": [
+          "Surprises arrive the same way.",
+          "So will the delight waiting for you.",
+          "Something wonderful is unfolding just like this.",
+          "Wonder keeps its own patient time.",
+          "That is how the best surprises come.",
+          "A happy surprise is gathering just so.",
+          "Let the unexpected arrive at its own pace.",
+          "Magic tends to work quietly, too.",
+          "Your next delight is coming this way.",
+          "Good surprises never rush either.",
+          "Something is being wrapped for you like this.",
+          "Life still has a few tricks up its sleeve.",
+          "The world keeps its gifts in the same way.",
+          "Delight often hides in plain sight like that.",
+          "Expect a little wonder before long.",
+          "The best things sneak up just so."
+        ]
+      }
+    }
+  }
+}

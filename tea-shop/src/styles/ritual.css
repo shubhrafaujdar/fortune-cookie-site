@@ -1,0 +1,496 @@
+/* ------------------------------------------------------------ the ritual */
+.ritual {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+.ritual-dim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(30, 18, 12, 0.62), rgba(14, 8, 5, 0.9));
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+.step-shake .ritual-dim {
+  opacity: 0.15;
+}
+.ritual:not(.step-shake) .ritual-dim {
+  opacity: 1;
+}
+.mode-cookie .ritual-dim,
+.mode-paper .ritual-dim {
+  animation: fade-in 0.7s ease both;
+}
+.ritual-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(120vw, 1000px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scale(0.6);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 167, 94, 0.3), rgba(214, 167, 94, 0.08) 40%, rgba(214, 167, 94, 0) 66%);
+  opacity: 0;
+  transition: opacity 1.4s ease, transform 2s ease;
+  pointer-events: none;
+}
+.ritual:not(.step-shake):not(.step-rise) .ritual-glow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* the rolled paper rising out of the jar and floating to the middle */
+.roll-clip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: var(--oy);
+  overflow: hidden;
+  pointer-events: none;
+}
+.roll-clip.unclipped {
+  height: 100vh;
+  overflow: visible;
+}
+.roll-flight {
+  position: absolute;
+  left: var(--ox);
+  top: var(--oy);
+  width: var(--roll-w);
+  transform: translate(-50%, 6%);
+  transition:
+    transform 0.95s cubic-bezier(0.2, 0.75, 0.3, 1),
+    left 1.25s cubic-bezier(0.45, 0.05, 0.35, 1),
+    top 1.25s cubic-bezier(0.2, 0.6, 0.4, 1),
+    opacity 0.6s ease;
+}
+.rolled-scroll {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 10px rgba(255, 214, 150, 0.7)) drop-shadow(0 6px 6px rgba(10, 5, 2, 0.5));
+}
+.step-rise .roll-flight {
+  transform: translate(-50%, -104%) rotate(-3deg);
+}
+.step-fly .roll-flight {
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%) scale(2) rotate(-14deg);
+}
+.step-fly .rolled-scroll {
+  animation: roll-float 1.25s ease-in-out;
+}
+@keyframes roll-float {
+  50% {
+    filter: drop-shadow(0 0 22px rgba(255, 214, 150, 0.95)) drop-shadow(0 6px 6px rgba(10, 5, 2, 0.5));
+  }
+}
+.step-cookie .roll-flight {
+  left: 50vw;
+  top: 50vh;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5) rotate(30deg);
+}
+
+/* the cookie */
+.cookie-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -54%);
+  width: clamp(190px, 28vw, 330px);
+  text-align: center;
+}
+.cookie-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 326 / 278;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.cookie-button:disabled {
+  cursor: default;
+}
+.cookie-whole,
+/* the broken cookie: two pieces + crumbs, painted as one picture and cut apart */
+.cookie-broken {
+  position: absolute;
+  left: -9%;
+  top: -6%;
+  width: 118%;
+  aspect-ratio: 380 / 312;
+  pointer-events: none;
+}
+.cookie-broken img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  filter: drop-shadow(0 12px 14px rgba(10, 5, 2, 0.55));
+}
+.broken-piece {
+  transition: transform 0.75s cubic-bezier(0.2, 0.85, 0.3, 1), opacity 0.05s linear;
+}
+.broken-piece.left {
+  transform-origin: 70% 60%;
+}
+.broken-piece.right {
+  transform-origin: 40% 70%;
+}
+.broken-crumbs {
+  transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1), opacity 0.35s ease;
+  transform: translateY(-6%) scale(0.9);
+}
+.ritual:is(.step-split, .step-emerge, .step-unfold, .step-text, .step-done) .cookie-whole {
+  opacity: 0;
+  animation: none;
+}
+.ritual:is(.step-split, .step-emerge) .broken-piece {
+  opacity: 1;
+}
+.ritual:is(.step-split, .step-emerge) .broken-piece.left {
+  transform: translate(-13%, 3%) rotate(-9deg);
+}
+.ritual:is(.step-split, .step-emerge) .broken-piece.right {
+  transform: translate(13%, 4%) rotate(8deg);
+}
+.ritual:is(.step-split, .step-emerge, .step-unfold, .step-text, .step-done) .broken-crumbs {
+  opacity: 1;
+  transform: translateY(8%) scale(1);
+}
+.ritual:is(.step-unfold, .step-text, .step-done) .broken-piece {
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.3, 0.6, 0.3, 1), opacity 0.7s ease;
+}
+.ritual:is(.step-unfold, .step-text, .step-done) .broken-piece.left {
+  transform: translate(-62%, 48%) rotate(-24deg) scale(0.82);
+}
+.ritual:is(.step-unfold, .step-text, .step-done) .broken-piece.right {
+  transform: translate(62%, 48%) rotate(22deg) scale(0.82);
+}
+.ritual:is(.step-unfold, .step-text, .step-done) .broken-crumbs {
+  opacity: 0;
+  transform: translateY(40%);
+  transition: transform 0.9s ease, opacity 0.7s ease;
+}
+.crumbs img {
+  position: absolute;
+  left: 46%;
+  top: 46%;
+  width: 11%;
+  opacity: 0;
+}
+.ritual:is(.step-split, .step-emerge, .step-unfold, .step-text, .step-done) .crumbs img {
+  animation: crumb 1s cubic-bezier(0.2, 0.7, 0.4, 1) forwards;
+  animation-delay: calc(var(--i) * 0.03s);
+}
+@keyframes crumb {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc((var(--i) - 2.5) * 46px), calc(110px + var(--i) * 9px)) rotate(calc(var(--i) * 70deg)) scale(0.9);
+  }
+}
+.ritual-hint {
+  margin: 18px 0 0;
+  font: 600 clamp(20px, 1.9vw, 27px) / 1 var(--hand);
+  color: var(--cream);
+  text-shadow: 0 0 12px rgba(214, 167, 94, 0.6), 0 1px 3px rgba(10, 5, 2, 0.9);
+  animation: fade-in 0.8s ease 1s both;
+  transition: opacity 0.3s ease;
+}
+.ritual:not(.step-cookie) .ritual-hint {
+  opacity: 0;
+}
+
+/* the paper */
+.paper-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -56%);
+  width: min(92vw, 660px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.paper-unfold {
+  width: 100%;
+  transform-origin: 50% 60%;
+  opacity: 0;
+  transform: translateY(26%) scale(0.08, 0.3);
+  transition: transform 0.8s cubic-bezier(0.22, 1.25, 0.36, 1), opacity 0.3s ease;
+}
+.step-emerge .paper-unfold {
+  opacity: 1;
+  transform: translateY(-4%) scale(0.12, 0.34) rotate(-4deg);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.3s ease;
+}
+.ritual:is(.step-unfold, .step-text, .step-done) .paper-unfold {
+  opacity: 1;
+  transform: none;
+}
+.mode-paper .paper-unfold {
+  animation: paper-drift-in 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+@keyframes paper-drift-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.94) rotate(-2deg);
+  }
+}
+
+.ritual-actions {
+  margin-top: 54px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  pointer-events: none;
+}
+.step-done .ritual-actions {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.ritual-footnote {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  text-align: center;
+  font: 500 clamp(16px, 1.3vw, 19px) / 1.2 var(--hand);
+  color: rgba(233, 220, 196, 0.78);
+}
+
+.shopkeeper-note {
+  position: absolute;
+  left: clamp(14px, 4vw, 70px);
+  bottom: clamp(16px, 6vh, 70px);
+  max-width: min(270px, 70vw);
+  padding: 22px 20px 16px;
+  background:
+    linear-gradient(rgba(239, 227, 201, 0.94), rgba(232, 214, 182, 0.96)),
+    url('/assets/textures/paper-fibers.webp');
+  background-blend-mode: multiply;
+  color: var(--ink);
+  font: 500 21px/1.15 var(--hand);
+  transform: rotate(-3deg);
+  box-shadow: 0 10px 18px rgba(10, 5, 2, 0.5);
+  animation: note-in 1s cubic-bezier(0.2, 0.8, 0.3, 1) 0.4s both;
+}
+.shopkeeper-note::before {
+  /* washi tape */
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 78px;
+  height: 22px;
+  transform: translateX(-50%) rotate(2deg);
+  background: rgba(133, 139, 112, 0.7);
+  box-shadow: 0 1px 2px rgba(10, 5, 2, 0.2);
+}
+@keyframes note-in {
+  from {
+    opacity: 0;
+    transform: translate(-30px, 20px) rotate(-9deg);
+  }
+}
+
+/* ------------------------------------------------------------ fortune paper */
+.fortune-paper {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  container-type: inline-size;
+  filter: drop-shadow(0 16px 20px rgba(8, 4, 2, 0.5));
+}
+.paper-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.fortune-text {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font: 500 4.2cqw / 1.24 var(--serif);
+  color: var(--ink);
+  opacity: 0;
+  filter: blur(4px);
+  transition: opacity 1.1s ease, filter 1.1s ease;
+}
+.fortune-text.is-long {
+  font-size: 3.75cqw;
+}
+.fortune-text.is-xlong {
+  font-size: 3.35cqw;
+  line-height: 1.2;
+}
+.fortune-text p {
+  margin: 0;
+  text-wrap: balance;
+}
+.fortune-text.is-shown {
+  opacity: 1;
+  filter: none;
+}
+.rarity-rare .fortune-text,
+.rarity-very-rare .fortune-text {
+  font-weight: 600;
+}
+.rarity-very-rare .fortune-text {
+  font-size: 4cqw;
+}
+.paper-caption {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 12px;
+  text-align: center;
+  font: 600 clamp(17px, 1.5vw, 21px) / 1 var(--hand);
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 1s ease 0.5s;
+}
+.paper-caption.is-shown {
+  opacity: 0.9;
+}
+.rarity-mark {
+  color: #e7c27c;
+}
+.flower-stamp {
+  position: absolute;
+  left: 7%;
+  top: 14%;
+  width: 10%;
+  transform: rotate(-14deg);
+  opacity: 0;
+  transition: opacity 0.8s ease 0.6s;
+  filter: drop-shadow(0 2px 2px rgba(10, 5, 2, 0.3));
+}
+.is-revealed .flower-stamp {
+  opacity: 0.95;
+}
+.paper-hanko {
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  width: 10.5%;
+  height: auto;
+  opacity: 0;
+  transform: rotate(-8deg) scale(1.5);
+  transition: opacity 0.3s ease 0.9s, transform 0.4s cubic-bezier(0.3, 1.5, 0.5, 1) 0.9s;
+  mix-blend-mode: multiply;
+}
+.is-revealed .paper-hanko {
+  opacity: 0.95;
+  transform: rotate(-8deg) scale(1);
+}
+.rarity-very-rare .paper-hanko {
+  right: 20%;
+  bottom: 17%;
+}
+.gold-corner {
+  position: absolute;
+  width: 10%;
+  opacity: 0;
+  transition: opacity 1.2s ease 0.4s;
+  filter: drop-shadow(0 0 3px rgba(255, 220, 150, 0.6));
+}
+.gold-corner.tl {
+  left: 4%;
+  top: 9%;
+}
+.gold-corner.br {
+  right: 4%;
+  bottom: 9%;
+  transform: rotate(180deg);
+}
+.is-revealed .gold-corner {
+  opacity: 0.9;
+}
+.rarity-rare {
+  filter: drop-shadow(0 0 16px rgba(214, 167, 94, 0.45)) drop-shadow(0 16px 20px rgba(8, 4, 2, 0.5));
+}
+.rarity-very-rare {
+  filter: drop-shadow(0 0 26px rgba(232, 190, 110, 0.6)) drop-shadow(0 16px 20px rgba(8, 4, 2, 0.5));
+}
+.gold-flecks {
+  position: absolute;
+  inset: 12% 8%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 30%, #d9b46a 0 1.4px, transparent 2px),
+    radial-gradient(circle at 22% 72%, #e8c886 0 1px, transparent 1.6px),
+    radial-gradient(circle at 37% 18%, #caa055 0 1.6px, transparent 2.2px),
+    radial-gradient(circle at 55% 84%, #e8c886 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 68% 22%, #d9b46a 0 1px, transparent 1.6px),
+    radial-gradient(circle at 81% 66%, #caa055 0 1.5px, transparent 2.1px),
+    radial-gradient(circle at 90% 34%, #e8c886 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 46% 50%, #d9b46a 0 0.9px, transparent 1.4px);
+  opacity: 0;
+  transition: opacity 1.5s ease 0.5s;
+}
+.is-revealed .gold-flecks {
+  opacity: 0.9;
+  animation: shimmer 4s ease-in-out 2s infinite;
+}
+@keyframes shimmer {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .paper-stage {
+    transform: translate(-50%, -62%);
+  }
+  .ritual-actions {
+    margin-top: 44px;
+  }
+  .fortune-text {
+    font-size: 4.9cqw;
+  }
+  .fortune-text.is-long {
+    font-size: 4.4cqw;
+  }
+  .fortune-text.is-xlong {
+    font-size: 3.9cqw;
+  }
+  .ritual-actions .paper-button {
+    width: 150px;
+  }
+  .shopkeeper-note {
+    font-size: 18px;
+    bottom: 10px;
+    left: 10px;
+    padding: 18px 14px 12px;
+  }
+}
