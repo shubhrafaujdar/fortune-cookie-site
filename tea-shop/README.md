@@ -68,12 +68,23 @@ Asset cut-outs were produced with `tools/extract_assets.py` from the original sh
 
 ## In the website repo
 
-This app lives in `tea-shop/` (source) and builds into `/shop` at the repo root, so the site
-serves it at `…/shop/` while everything else is untouched.
+The shop is the homepage of https://www.dailyfortunecookies.com/. Its source lives in
+`tea-shop/`, and `npm run build` builds it and copies it to the repo root
+(`index.html`, `favicon.png`, `assets/`, `fortunes/`). Nothing else at the root is touched:
+the previous homepage is kept at `classic.html`, and `privacy-policy.html`,
+`terms-of-service.html`, `ads.txt`, `images/` and the Cloudflare `functions/` stay as they were.
+Old links to `/shop/` redirect to the homepage.
 
 ```bash
 cd tea-shop
-npm install
-npm run dev      # work on it locally
-npm run build    # rebuilds ../shop: commit that folder to publish
+npm install          # first time only
+npm run dev          # work on it locally
+npm run build        # build + publish to the repo root
+cd ..
+git add index.html favicon.png assets fortunes shop tea-shop
+git commit -m "Update the shop"
+git push             # Cloudflare Pages deploys it
 ```
+
+The homepage keeps the site's Google Analytics tag and Google AdSense loader in
+`tea-shop/index.html`.

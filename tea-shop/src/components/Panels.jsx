@@ -426,6 +426,14 @@ export function AboutPanel({ open, onClose, onForget, isMember }) {
           journal, and may choose a category with the paper tags.
         </p>
         <p className="about-hint">Little things in the shop respond to a touch. The cat, especially.</p>
+        <nav className="about-links" aria-label="More">
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-of-service.html">Terms of Service</a>
+          <a href="https://buymeacoffee.com/fortunecookie" target="_blank" rel="noopener noreferrer">
+            Buy us a coffee
+          </a>
+          <a href="/classic.html">The classic fortune cookie</a>
+        </nav>
         {isMember && (
         <div className="about-forget">
           {confirming ? (
