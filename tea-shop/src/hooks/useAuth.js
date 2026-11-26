@@ -1,18 +1,23 @@
-import { useCallback, useState } from 'react'
-import * as auth from '../lib/auth.js'
+import { useCallback, useEffect, useState } from 'react'
+import { auth } from '../lib/auth.js'
 
+/** The signed-in Google user (or null). `ready` turns true once we know. */
 export function useAuth() {
-  const [user, setUser] = useState(() => auth.currentUser())
+  const [user, setUser] = useState(null)
+  const [ready, setReady] = useState(false)
 
-  const signUp = useCallback(async (details) => {
-    const u = await auth.signUp(details)
-    setUser(u)
-    return u
-  }, [])
+  useEffect(
+    () =>
+      auth.watch((u) => {
+        setUser(u)
+        setReady(true)
+      }),
+    [],
+  )
 
-  const logIn = useCallback(async (details) => {
-    const u = await auth.logIn(details)
-    setUser(u)
+  const signIn = useCallback(async () => {
+    const u = await auth.signInWithGoogle()
+    if (u) setUser(u)
     return u
   }, [])
 
@@ -21,5 +26,5 @@ export function useAuth() {
     setUser(null)
   }, [])
 
-  return { user, signUp, logIn, logOut }
+  return { user, ready, signIn, logOut }
 }

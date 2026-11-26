@@ -30,7 +30,7 @@ function place(spec, portrait) {
 }
 
 const ShopScene = forwardRef(function ShopScene(
-  { layout, mood, onJar, onProp, jarState, todayDrawn, jarHint, jarLock },
+  { layout, mood, onJar, onProp, jarState, todayDrawn, jarHint, jarLock, covered },
   jarRef,
 ) {
   const { scale, x, y, portrait } = layout
@@ -42,11 +42,11 @@ const ShopScene = forwardRef(function ShopScene(
   const prop = (name, key) => () => onProp(name, key)
 
   return (
-    <div className={`shop mood-${mood} ${portrait ? 'is-portrait' : ''}`} style={{ '--seam': `${Math.max(0, y)}px` }}>
+    <div className={`shop mood-${mood} ${portrait ? 'is-portrait' : ''} ${covered ? 'is-covered' : ''}`} style={{ '--seam': `${Math.max(0, y)}px` }}>
       {portrait && <div className="shop-backdrop" style={{ backgroundImage: `url(${asset('scene/shop-interior.webp')})` }} aria-hidden="true" />}
       <div className="stage" style={stageStyle}>
         <img className="scene-art" src={asset('scene/shop-interior.webp')} alt="Inside a small Japanese tea shop on a rainy evening: lanterns, shelves of teapots, a rainy window and a long wooden counter." draggable="false" />
-        <RainWindow x={452} y={118} w={642} h={466} />
+        <RainWindow x={452} y={118} w={642} h={466} paused={covered} />
         <div className="mood-tint" aria-hidden="true" />
         {LANTERNS.map((l, i) => (
           <LanternGlow key={i} x={l.x} y={l.y} r={l.r} delay={l.d} strong={flare === i ? 1.7 : 1} />
@@ -104,7 +104,7 @@ const ShopScene = forwardRef(function ShopScene(
           className={`prop jar jar-${jarState} ${todayDrawn ? 'is-drawn' : ''} ${jarLock ? `is-locked lock-${jarLock}` : ''}`}
           style={place(PROPS.jar, portrait)}
           onClick={onJar}
-          aria-label={jarLock === 'guest' ? 'Fortune jar, locked: sign up to open more' : jarLock === 'daily' ? 'Fortune jar, resting until midnight' : 'Fortune jar: choose a little fortune'}
+          aria-label={jarLock === 'guest' ? 'Fortune jar, locked: sign in to open more' : jarLock === 'daily' ? 'Fortune jar, resting until midnight' : 'Fortune jar: choose a little fortune'}
         >
           <span className="jar-glow" aria-hidden="true" />
           <img src={asset('objects/fortune-jar.webp')} alt="" draggable="false" />
@@ -162,7 +162,6 @@ const ShopScene = forwardRef(function ShopScene(
           <img src={asset('objects/lucky-cat.webp')} alt="" draggable="false" />
         </button>
       </div>
-      <div className="paper-grain" style={{ backgroundImage: `url(${asset('textures/paper-grain.webp')})` }} aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
     </div>
   )

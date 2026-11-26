@@ -93,8 +93,12 @@ export default function FortuneRitual({ mode, fortune, origin, rollWidth, isMemb
 
       {at('emerge') && (
         <div className="paper-stage">
-          <div className="paper-unfold">
-            <FortunePaper fortune={fortune} showText={at('text')} />
+          <div className="paper-row">
+            <img className="slip-cookie left" src={asset('cookies/cookie-shell.webp')} alt="" aria-hidden="true" draggable="false" />
+            <div className="paper-unfold">
+              <FortunePaper fortune={fortune} showText={at('text')} />
+            </div>
+            <img className="slip-cookie right" src={asset('cookies/cookie-shell.webp')} alt="" aria-hidden="true" draggable="false" />
           </div>
           <div className="ritual-actions" aria-hidden={!at('done')}>
             {isMember ? (

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from 'react'
 const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 /** Rain falling outside and drops sliding down the glass. Lives in stage pixels. */
-export function RainWindow({ x, y, w, h }) {
+export function RainWindow({ x, y, w, h, paused = false }) {
   const ref = useRef(null)
   useEffect(() => {
     const canvas = ref.current
@@ -23,7 +23,15 @@ export function RainWindow({ x, y, w, h }) {
     }
     let raf
     let last = performance.now()
+    if (paused) {
+      ctx.clearRect(0, 0, w, h)
+      return undefined
+    }
     const frame = (now) => {
+      if (document.hidden) {
+        raf = requestAnimationFrame(frame)
+        return
+      }
       const dt = Math.min(3, (now - last) / 16.7)
       last = now
       ctx.clearRect(0, 0, w, h)
@@ -75,7 +83,7 @@ export function RainWindow({ x, y, w, h }) {
     }
     raf = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(raf)
-  }, [w, h])
+  }, [w, h, paused])
   return <canvas ref={ref} className="rain-window" style={{ left: x, top: y, width: w, height: h }} aria-hidden="true" />
 }
 

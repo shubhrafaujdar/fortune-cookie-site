@@ -76,8 +76,7 @@ img {
   cursor: pointer;
   width: clamp(168px, 18vw, 226px);
   aspect-ratio: 434 / 136;
-  filter: drop-shadow(0 4px 5px rgba(20, 10, 5, 0.45));
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition: transform 0.25s ease;
 }
 .paper-button.v2 {
   aspect-ratio: 430 / 140;
@@ -87,6 +86,7 @@ img {
   inset: 0;
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 4px 5px rgba(20, 10, 5, 0.45));
 }
 .paper-button span {
   position: relative;
@@ -102,14 +102,15 @@ img {
 }
 .paper-button:hover:not(:disabled) {
   transform: translateY(-2px) rotate(-0.6deg);
-  filter: drop-shadow(0 7px 8px rgba(20, 10, 5, 0.5)) brightness(1.04);
 }
 .paper-button:active:not(:disabled) {
   transform: translateY(1px);
 }
 .paper-button:disabled {
   cursor: default;
-  filter: drop-shadow(0 2px 3px rgba(20, 10, 5, 0.35)) saturate(0.7);
+}
+.paper-button:disabled img {
+  opacity: 0.85;
 }
 .paper-button:disabled span {
   color: var(--ink-soft);

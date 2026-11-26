@@ -1,13 +1,13 @@
 """End-to-end test of the shop in a real browser.
 
-Usage:
-  npm run build && npx vite preview --port 4173 &
+Usage (uses a test build where Google sign-in is replaced by a pretend account):
+  npx vite build --mode e2e --outDir dist-e2e && npx vite preview --outDir dist-e2e --port 4174 &
   python3 tools/flow_test.py [desktop|phone]
 """
 import asyncio, sys
 from playwright.async_api import async_playwright
 
-URL = 'http://localhost:4173/'
+URL = 'http://localhost:4174/'
 VP = sys.argv[1] if len(sys.argv) > 1 else 'desktop'
 SIZES = {'desktop': (1440, 900, False), 'phone': (390, 844, True)}
 OUT = '/tmp/shots'
@@ -26,14 +26,18 @@ async def ls(page, key):
 async def open_cookie(page, shots=None):
     await page.wait_for_selector('.cookie-button:not([disabled])', timeout=9000)
     await page.wait_for_timeout(250)
-    await page.click('.cookie-button')
+    await page.click('.cookie-button', force=True)
     if shots:
-        await page.wait_for_timeout(520)
-        await page.screenshot(path=f'{OUT}/{VP}-{shots}-split.png')
+        await page.wait_for_selector('.ritual.step-split', timeout=5000)
+        await page.wait_for_timeout(180)
+        # the pieces should be on screen mid-break (checked in the page, not by screenshot,
+        # because headless capture can stall during heavy transitions)
+        vis = await page.evaluate("[...document.querySelectorAll('.broken-piece')].map(i => getComputedStyle(i).opacity)")
+        check('pieces visible while breaking', all(float(o) > 0.5 for o in vis), vis)
     await page.wait_for_selector('.ritual.step-done', timeout=9000)
-    await page.wait_for_timeout(800)
+    await page.wait_for_timeout(1200)
     if shots:
-        await page.screenshot(path=f'{OUT}/{VP}-{shots}-done.png')
+        await page.screenshot(path=f'{OUT}/{VP}-{shots}-done.png', timeout=60000)
     return await page.locator('.fortune-text p').inner_text()
 
 async def close_panel(page):
@@ -84,7 +88,7 @@ async def run(page, errors, requests):
     foot = await page.locator('.ritual-footnote').inner_text()
     check('footnote last free', 'last free cookie' in foot, foot)
     label = await page.locator('.ritual-actions .paper-button').last.inner_text()
-    check('another says sign up', 'Sign up' in label, label)
+    check('another says sign in', 'Sign in' in label, label)
     await page.locator('.ritual-actions .paper-button').last.click()
     await page.wait_for_selector('.panel.account-panel.reason-limit', timeout=3000)
     check('jar locked message', 'locked' in await page.locator('.account-head h2').inner_text())
@@ -96,16 +100,14 @@ async def run(page, errors, requests):
     await page.wait_for_selector('.panel.account-panel.reason-limit', timeout=3000)
     check('locked jar asks to sign up', await page.locator('.ritual').count() == 0)
 
-    # ---- sign up
-    await page.fill('.account-form input[autocomplete="given-name"]', 'Mei')
-    await page.fill('.account-form input[type=email]', 'mei@example.com')
-    await page.fill('.account-form input[type=password]', 'teatime123')
-    await page.click('.account-form button[type=submit]')
+    # ---- sign in with Google (the only way to sign in)
+    check('only Google sign-in offered', await page.locator('.account-panel input').count() == 0 and await page.locator('.google-button').count() == 1)
+    await page.click('.google-button')
     await page.wait_for_selector('.panel.account-panel', state='detached', timeout=6000)
     check('member plaque: 5 left today', '5 cookies left today' in await page.locator('.account-note').inner_text())
     check('padlock gone', await page.locator('.jar-padlock').count() == 0)
     check('tags unlocked', await page.locator('.category-cord.is-locked').count() == 0)
-    uid = (await ls(page, 'session'))['userId']
+    uid = await page.evaluate("JSON.parse(localStorage.getItem('e2e-user')).id")
 
     # ---- member: 5 cookies, keep closes, share works
     await page.wait_for_timeout(3500)
@@ -191,6 +193,11 @@ async def main():
         page.on('request', lambda r: requests.append(r.url))
         try:
             await run(page, errors, requests)
+        except Exception as e:
+            state = await page.evaluate("({ ritual: document.querySelector('.ritual')?.className, panel: document.querySelector('.panel')?.className, hidden: document.hidden })")
+            print('STOPPED:', str(e).split(chr(10))[0][:160])
+            print('page state:', state)
+            print('errors:', errors[:5])
         finally:
             for r in results:
                 print(*r)

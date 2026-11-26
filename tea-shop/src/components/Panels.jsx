@@ -98,7 +98,7 @@ export function JournalPanel({ open, onClose, user, kept, history, isKept, keep,
             <img src={asset('objects/fortune-journal.webp')} alt="" aria-hidden="true" />
             <div>
               <h2>{owner} Fortune Journal</h2>
-              <p>{user ? `Member since ${when(user.createdAt).date}` : 'A guest’s notebook. Sign up to keep it safe.'}</p>
+              <p>{user ? `Member since ${when(user.createdAt).date}` : 'A guest’s notebook. Sign in to keep it safe.'}</p>
             </div>
           </header>
 
@@ -293,10 +293,20 @@ export function JournalPanel({ open, onClose, user, kept, history, isKept, keep,
   )
 }
 
-// ------------------------------------------------------------------ sign up / log in / account
-export function AccountPanel({ open, onClose, user, reason, freeLeft, stats, onSignUp, onLogIn, onLogOut }) {
-  const [mode, setMode] = useState('signup')
-  const [form, setForm] = useState({ name: '', email: '', password: '' })
+// ------------------------------------------------------------------ sign in (Google) / account
+function GoogleMark() {
+  // Google's "G", as used on its official sign-in buttons
+  return (
+    <svg className="google-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  )
+}
+
+export function AccountPanel({ open, onClose, user, reason, freeLeft, stats, onSignIn, onLogOut }) {
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
 
@@ -305,18 +315,14 @@ export function AccountPanel({ open, onClose, user, reason, freeLeft, stats, onS
     setBusy(false)
     onClose()
   }
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
-  const submit = async (e) => {
-    e.preventDefault()
+  const signIn = async () => {
     setError(null)
     setBusy(true)
     try {
-      if (mode === 'signup') await onSignUp(form)
-      else await onLogIn(form)
-      setForm({ name: '', email: '', password: '' })
+      await onSignIn()
     } catch (err) {
-      setError(err instanceof AuthError ? { message: err.message, field: err.field } : { message: 'Something went wrong. Please try again.' })
+      setError(err instanceof AuthError ? err.message : 'Could not sign in with Google. Please try again.')
     } finally {
       setBusy(false)
     }
@@ -326,7 +332,9 @@ export function AccountPanel({ open, onClose, user, reason, freeLeft, stats, onS
     return (
       <Panel open={open} onClose={close} className="account-panel" label="Your account">
         <div className="account-head">
-          <img src={asset('objects/lucky-cat.webp')} alt="" aria-hidden="true" />
+          <span className="account-art">
+            {user.photo ? <img className="account-photo" src={user.photo} alt="" referrerPolicy="no-referrer" /> : <img src={asset('objects/lucky-cat.webp')} alt="" aria-hidden="true" />}
+          </span>
           <div>
             <h2>Welcome back, {user.name}</h2>
             <p>{user.email}</p>
@@ -352,70 +360,41 @@ export function AccountPanel({ open, onClose, user, reason, freeLeft, stats, onS
   }
 
   const HEADLINES = {
-    limit: ['The jar is locked', `You have opened your ${FREE_FORTUNES} free cookies. Sign up to unlock the jar.`],
-    journal: ['The journal is for members', 'Sign up to keep every fortune you love in your own journal.'],
-    tags: ['Choosing is for members', 'Sign up to tie a paper tag to your wish and choose the kind of fortune you get.'],
-    keep: ['Keep this fortune?', 'Sign up to keep fortunes in your own journal.'],
+    limit: ['The jar is locked', `You have opened your ${FREE_FORTUNES} free cookies. Sign in to unlock the jar.`],
+    journal: ['The journal is for members', 'Sign in to keep every fortune you love in your own journal.'],
+    tags: ['Choosing is for members', 'Sign in to tie a paper tag to your wish and choose the kind of fortune you get.'],
+    keep: ['Keep this fortune?', 'Sign in to keep fortunes in your own journal.'],
   }
   const [title, lead] =
-    mode === 'login'
-      ? ['Welcome back', 'Log in to open your daily cookies and find your journal.']
-      : HEADLINES[reason] || ['Join the shop', freeLeft > 0 ? `You have ${freeLeft} free ${freeLeft === 1 ? 'cookie' : 'cookies'} left. Members get more, every day.` : 'Members get fresh cookies every day.']
+    HEADLINES[reason] || ['Join the shop', freeLeft > 0 ? `You have ${freeLeft} free ${freeLeft === 1 ? 'cookie' : 'cookies'} left. Members get more, every day.` : 'Members get fresh cookies every day.']
+
   return (
-    <Panel open={open} onClose={close} className={`account-panel ${reason ? `reason-${reason}` : ''}`} label={mode === 'signup' ? 'Sign up' : 'Log in'}>
+    <Panel open={open} onClose={close} className={`account-panel ${reason ? `reason-${reason}` : ''}`} label="Sign in">
       <div className="account-head">
         <span className="account-art">
           <img src={asset('objects/lucky-cat.webp')} alt="" aria-hidden="true" />
-          {reason && mode === 'signup' && <LockIcon className="account-lock" />}
+          {reason && <LockIcon className="account-lock" />}
         </span>
         <div>
           <h2>{title}</h2>
           <p>{lead}</p>
         </div>
       </div>
-      {mode === 'signup' && (
-        <ul className="member-perks">
-          <li>{MEMBER_DAILY_FORTUNES} fortune cookies every day</li>
-          <li>A journal to keep the ones you love</li>
-          <li>Paper tags to choose the kind of fortune</li>
-        </ul>
+      <ul className="member-perks">
+        <li>{MEMBER_DAILY_FORTUNES} fortune cookies every day</li>
+        <li>A journal to keep the ones you love</li>
+        <li>Paper tags to choose the kind of fortune</li>
+      </ul>
+      <button type="button" className="google-button" onClick={signIn} disabled={busy}>
+        <GoogleMark />
+        <span>{busy ? 'Opening Google…' : 'Continue with Google'}</span>
+      </button>
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
       )}
-
-      <div className="account-switch" role="tablist">
-        <button type="button" role="tab" aria-selected={mode === 'signup'} className={mode === 'signup' ? 'active' : ''} onClick={() => { setMode('signup'); setError(null) }}>
-          Sign up
-        </button>
-        <button type="button" role="tab" aria-selected={mode === 'login'} className={mode === 'login' ? 'active' : ''} onClick={() => { setMode('login'); setError(null) }}>
-          Log in
-        </button>
-      </div>
-
-      <form className="account-form" onSubmit={submit} noValidate>
-        {mode === 'signup' && (
-          <label className={error?.field === 'name' ? 'has-error' : ''}>
-            <span>Your name</span>
-            <input type="text" autoComplete="given-name" value={form.name} onChange={set('name')} maxLength={40} required />
-          </label>
-        )}
-        <label className={error?.field === 'email' ? 'has-error' : ''}>
-          <span>Email</span>
-          <input type="email" autoComplete="email" value={form.email} onChange={set('email')} required />
-        </label>
-        <label className={error?.field === 'password' ? 'has-error' : ''}>
-          <span>Password</span>
-          <input type="password" autoComplete={mode === 'signup' ? 'new-password' : 'current-password'} value={form.password} onChange={set('password')} minLength={8} required />
-          {mode === 'signup' && <small>At least 8 characters.</small>}
-        </label>
-        {error && (
-          <p className="form-error" role="alert">
-            {error.message}
-          </p>
-        )}
-        <PaperButton type="submit" disabled={busy}>
-          {busy ? 'One moment…' : mode === 'signup' ? 'Sign up' : 'Log in'}
-        </PaperButton>
-      </form>
-      <p className="account-fine">Your account and journal are saved in this browser on this device.</p>
+      <p className="account-fine">We only use your Google name and email to keep your journal. No password needed.</p>
     </Panel>
   )
 }
@@ -447,6 +426,7 @@ export function AboutPanel({ open, onClose, onForget, isMember }) {
           journal, and may choose a category with the paper tags.
         </p>
         <p className="about-hint">Little things in the shop respond to a touch. The cat, especially.</p>
+        {isMember && (
         <div className="about-forget">
           {confirming ? (
             <>
@@ -464,6 +444,7 @@ export function AboutPanel({ open, onClose, onForget, isMember }) {
             </button>
           )}
         </div>
+        )}
       </div>
     </Panel>
   )

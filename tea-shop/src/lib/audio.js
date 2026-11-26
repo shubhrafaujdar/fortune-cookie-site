@@ -32,8 +32,30 @@ function ensure() {
 
 // iPhone/iPad: the ring/silent switch mutes web audio unless the page asks to
 // be treated as media playback (newer iOS) or is playing an <audio> element
-// (older iOS). Do both.
-const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
+// (older iOS). Do both. The silent clip must have a real length: looping a
+// zero-length clip makes the browser restart it nonstop and the page lags.
+function silentWavUrl(seconds = 1, rate = 8000) {
+  const n = Math.floor(seconds * rate)
+  const buf = new ArrayBuffer(44 + n)
+  const v = new DataView(buf)
+  const str = (o, t) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)))
+  str(0, 'RIFF')
+  v.setUint32(4, 36 + n, true)
+  str(8, 'WAVE')
+  str(12, 'fmt ')
+  v.setUint32(16, 16, true) // fmt chunk size
+  v.setUint16(20, 1, true) // PCM
+  v.setUint16(22, 1, true) // mono
+  v.setUint32(24, rate, true)
+  v.setUint32(28, rate, true) // byte rate (8-bit mono)
+  v.setUint16(32, 1, true) // block align
+  v.setUint16(34, 8, true) // bits per sample
+  str(36, 'data')
+  v.setUint32(40, n, true)
+  new Uint8Array(buf, 44).fill(128) // 8-bit silence is 128
+  return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }))
+}
+
 function iosPlaybackMode() {
   try {
     if (navigator.audioSession) navigator.audioSession.type = 'playback'
@@ -42,7 +64,7 @@ function iosPlaybackMode() {
   }
   if (keepAlive) return
   try {
-    keepAlive = new Audio(SILENT_WAV)
+    keepAlive = new Audio(silentWavUrl())
     keepAlive.loop = true
     keepAlive.setAttribute('playsinline', '')
     keepAlive.volume = 0.01

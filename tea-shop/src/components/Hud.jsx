@@ -13,7 +13,7 @@ export function Title() {
 
 /** Paper tags tied to a cord along the counter. Members only: guests see them locked. */
 export function CategoryCord({ selected, onSelect, locked, resting }) {
-  const label = locked ? 'Sign up to choose a category' : resting ? 'Fresh cookies at midnight' : selected ? 'The jar is listening for…' : 'Tie a tag to your wish, or let the jar decide'
+  const label = locked ? 'Sign in to choose a category' : resting ? 'Fresh cookies at midnight' : selected ? 'The jar is listening for…' : 'Tie a tag to your wish, or let the jar decide'
   return (
     <nav className={`category-cord ${locked ? 'is-locked' : ''} ${resting ? 'is-resting' : ''}`} aria-label="Fortune categories">
       <p className="cord-label">
@@ -44,18 +44,18 @@ export function CategoryCord({ selected, onSelect, locked, resting }) {
   )
 }
 
-/** A small wooden plaque hanging from a cherry branch: sign up, or your name. */
+/** A small wooden plaque hanging from a cherry branch: sign in, or your name. */
 export function AccountTag({ user, left, onClick }) {
   return (
     <div className="daily-hanger">
       <img className="hanger-branch" src={asset('decor/cherry-branch.webp')} alt="" aria-hidden="true" draggable="false" />
-      <button type="button" className={`account-tag ${user ? 'is-member' : left === 0 ? 'is-out' : ''}`} onClick={onClick} aria-label={user ? `Your account, ${user.name}` : 'Sign up or log in'}>
+      <button type="button" className={`account-tag ${user ? 'is-member' : left === 0 ? 'is-out' : ''}`} onClick={onClick} aria-label={user ? `Your account, ${user.name}` : 'Sign in with Google'}>
         <svg className="plaque-strings" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
           <path d="M50 0 L18 40 M50 0 L82 40" stroke="#8a3b2c" strokeWidth="1.6" fill="none" vectorEffect="non-scaling-stroke" />
         </svg>
         <span className="plaque">
           <img src={asset('ui/button-blank.webp')} alt="" draggable="false" />
-          <span className="plaque-text">{user ? user.name : 'Sign up'}</span>
+          <span className="plaque-text">{user ? user.name : 'Sign in'}</span>
         </span>
         <span className="account-note">
           {user
@@ -64,7 +64,7 @@ export function AccountTag({ user, left, onClick }) {
               : 'more at midnight'
             : left > 0
               ? `${left} free ${left === 1 ? 'cookie' : 'cookies'} left`
-              : 'sign up for more'}
+              : 'sign in for more'}
         </span>
       </button>
     </div>

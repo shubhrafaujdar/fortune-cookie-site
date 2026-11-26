@@ -1,76 +1,107 @@
-// Accounts for the shop.
-//
-// This is the ONLY file that knows where accounts live. Right now accounts are
-// kept in this browser (passwords are salted and hashed with PBKDF2, never
-// stored as text). To move to real server accounts (Supabase, Firebase, your
-// own API…), replace the bodies of signUp / logIn / logOut / currentUser with
-// calls to that service; the rest of the app only uses these four functions.
+// Sign-in for the shop: Google accounts only, through Firebase Authentication.
+// Firebase is loaded in the background after the shop opens, so it never slows
+// down the first paint.
 
-import { load, save } from './storage.js'
+import { firebaseConfig } from './firebaseConfig.js'
 
-const ITERATIONS = 150_000
-const enc = new TextEncoder()
+export class AuthError extends Error {}
 
-const toHex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('')
-const fromHex = (hex) => new Uint8Array(hex.match(/.{2}/g).map((h) => parseInt(h, 16)))
-
-async function hashPassword(password, saltHex) {
-  const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits'])
-  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: fromHex(saltHex), iterations: ITERATIONS, hash: 'SHA-256' }, key, 256)
-  return toHex(bits)
+const FRIENDLY = {
+  'auth/unauthorized-domain':
+    'Google sign-in is not allowed on this web address yet. (Add it in Firebase → Authentication → Settings → Authorized domains.)',
+  'auth/operation-not-allowed': 'Google sign-in is not switched on yet. (Firebase → Authentication → Sign-in method → Google.)',
+  'auth/network-request-failed': 'The internet connection dropped. Please try again.',
+  'auth/too-many-requests': 'Too many tries. Please wait a moment and try again.',
+  'auth/internal-error': 'Google sign-in hit a snag. Please try again.',
 }
 
-export class AuthError extends Error {
-  constructor(message, field) {
-    super(message)
-    this.field = field
+function toUser(u) {
+  if (!u) return null
+  const name = (u.displayName || u.email || 'Friend').split(/[\s@]/)[0]
+  return {
+    id: u.uid,
+    name,
+    fullName: u.displayName || name,
+    email: u.email || '',
+    photo: u.photoURL || null,
+    createdAt: Date.parse(u.metadata?.creationTime || '') || Date.now(),
   }
 }
 
-const normEmail = (e) => e.trim().toLowerCase()
-const publicUser = (a) => ({ id: a.id, name: a.name, email: a.email, createdAt: a.createdAt })
-
-export function validateSignUp({ name, email, password }) {
-  if (!name?.trim()) throw new AuthError('Please tell the shopkeeper your name.', 'name')
-  if (name.trim().length > 40) throw new AuthError('That name is a little long for the journal cover.', 'name')
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.trim() || '')) throw new AuthError('That email does not look quite right.', 'email')
-  if ((password || '').length < 8) throw new AuthError('Use at least 8 characters for your password.', 'password')
+// ------------------------------------------------------------------ Firebase
+let ready = null
+function firebase() {
+  ready ||= Promise.all([import('firebase/app'), import('firebase/auth')]).then(([app, auth]) => {
+    const instance = auth.getAuth(app.initializeApp(firebaseConfig))
+    const provider = new auth.GoogleAuthProvider()
+    provider.setCustomParameters({ prompt: 'select_account' })
+    return { auth, instance, provider }
+  })
+  return ready
 }
 
-export async function signUp({ name, email, password }) {
-  validateSignUp({ name, email, password })
-  const accounts = load('accounts', {})
-  const key = normEmail(email)
-  if (accounts[key]) throw new AuthError('There is already an account with that email. Try logging in.', 'email')
-  const salt = toHex(crypto.getRandomValues(new Uint8Array(16)))
-  const account = {
-    id: `u_${toHex(crypto.getRandomValues(new Uint8Array(8)))}`,
-    name: name.trim(),
-    email: key,
-    salt,
-    hash: await hashPassword(password, salt),
-    createdAt: Date.now(),
-  }
-  save('accounts', { ...accounts, [key]: account })
-  save('session', { userId: account.id, email: key })
-  return publicUser(account)
+const realAuth = {
+  /** Calls back with the signed-in user (or null) now and whenever it changes. */
+  watch(callback) {
+    let unsub = () => {}
+    let cancelled = false
+    firebase()
+      .then(({ auth, instance }) => {
+        if (cancelled) return
+        auth.getRedirectResult(instance).catch(() => {})
+        unsub = auth.onAuthStateChanged(instance, (u) => callback(toUser(u)))
+      })
+      .catch(() => callback(null))
+    return () => {
+      cancelled = true
+      unsub()
+    }
+  },
+
+  /** Opens Google's account chooser. Returns the user, or null if the window was closed. */
+  async signInWithGoogle() {
+    const { auth, instance, provider } = await firebase()
+    try {
+      const result = await auth.signInWithPopup(instance, provider)
+      return toUser(result.user)
+    } catch (err) {
+      const code = err?.code || ''
+      if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return null
+      if (code === 'auth/popup-blocked' || code === 'auth/operation-not-supported-in-environment') {
+        await auth.signInWithRedirect(instance, provider) // the page navigates to Google and back
+        return null
+      }
+      throw new AuthError(FRIENDLY[code] || 'Could not sign in with Google. Please try again.')
+    }
+  },
+
+  async logOut() {
+    const { auth, instance } = await firebase()
+    await auth.signOut(instance)
+  },
 }
 
-export async function logIn({ email, password }) {
-  const account = load('accounts', {})[normEmail(email || '')]
-  if (!account) throw new AuthError('No account with that email yet. Sign up instead?', 'email')
-  if ((await hashPassword(password || '', account.salt)) !== account.hash) throw new AuthError('That password does not match.', 'password')
-  save('session', { userId: account.id, email: account.email })
-  return publicUser(account)
+// ------------------------------------------------------------------ test double
+// Only included in builds made with `vite build --mode e2e` (used by the
+// automated browser tests); production builds drop this code entirely.
+const fakeAuth = {
+  watch(callback) {
+    const read = () => JSON.parse(localStorage.getItem('e2e-user') || 'null')
+    callback(read())
+    const on = () => callback(read())
+    window.addEventListener('e2e-auth', on)
+    return () => window.removeEventListener('e2e-auth', on)
+  },
+  async signInWithGoogle() {
+    const u = { id: 'e2e-user-1', name: 'Mei', fullName: 'Mei Tanaka', email: 'mei@example.com', photo: null, createdAt: Date.now() }
+    localStorage.setItem('e2e-user', JSON.stringify(u))
+    window.dispatchEvent(new Event('e2e-auth'))
+    return u
+  },
+  async logOut() {
+    localStorage.removeItem('e2e-user')
+    window.dispatchEvent(new Event('e2e-auth'))
+  },
 }
 
-export async function logOut() {
-  save('session', null)
-}
-
-export function currentUser() {
-  const s = load('session', null)
-  if (!s) return null
-  const account = load('accounts', {})[s.email]
-  return account && account.id === s.userId ? publicUser(account) : null
-}
+export const auth = import.meta.env.VITE_FAKE_AUTH === 'true' ? fakeAuth : realAuth

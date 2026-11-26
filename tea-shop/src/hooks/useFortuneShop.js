@@ -78,7 +78,7 @@ export function useFortuneShop(userId) {
   const usedToday = isMember && book.daily.date === today ? book.daily.used : 0
   const left = isMember ? Math.max(0, MEMBER_DAILY_FORTUNES - usedToday) : Math.max(0, FREE_FORTUNES - book.used)
   const pendingFortune = book.pending && !book.pending.opened ? getFortune(book.pending.fortuneId) : null
-  // 'guest' = free cookies used up (sign up to unlock); 'daily' = member is done for today
+  // 'guest' = free cookies used up (sign in to unlock); 'daily' = member is done for today
   const limit = pendingFortune || left > 0 ? null : isMember ? 'daily' : 'guest'
 
   /**
@@ -119,7 +119,7 @@ export function useFortuneShop(userId) {
 
   const isKept = useCallback((fortuneId, at) => book.kept.some((x) => x.fortuneId === fortuneId && x.at === at), [book.kept])
 
-  /** A guest's unopened cookie comes along when they sign up. */
+  /** A guest's unopened cookie comes along when they sign in. */
   const carryGuestCookie = useCallback((newUserId) => {
     const g = load('guest:pending', null)
     if (g && !g.opened && !load(`user:${newUserId}:pending`, null)) save(`user:${newUserId}:pending`, g)

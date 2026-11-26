@@ -71,7 +71,7 @@ export default function App() {
 
   const center = () => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
 
-  /** Ask a guest to sign up; `reason` picks the message (limit, journal, tags, keep). */
+  /** Ask a guest to sign in; `reason` picks the message (limit, journal, tags, keep). */
   const askToJoin = useCallback((reason) => {
     setAccountReason(reason)
     setPanel('account')
@@ -88,11 +88,15 @@ export default function App() {
   // ---- the jar
   const onJar = () => {
     if (ritual || jarState === 'shaking' || jarState === 'nudge') return
+    if (!auth.ready) {
+      say('One moment, the shopkeeper is checking the guest book…')
+      return
+    }
     const result = shop.draw(category)
     if (result.blocked) {
       setJarState('nudge')
       setTimeout(() => setJarState('idle'), 700)
-      say(result.blocked === 'guest' ? 'The jar is locked. Sign up to open more.' : 'The jar is resting until midnight.')
+      say(result.blocked === 'guest' ? 'The jar is locked. Sign in to open more.' : 'The jar is resting until midnight.')
       setTimeout(() => showLimit(result.blocked), 650)
       return
     }
@@ -175,16 +179,12 @@ export default function App() {
   }
 
   // ---- accounts
-  const onSignUp = async (details) => {
-    const u = await auth.signUp(details)
+  const onSignIn = async () => {
+    const u = await auth.signIn()
+    if (!u) return // window closed, or the page is moving to Google and back
     shop.carryGuestCookie(u.id)
     setPanel(null)
-    say(`Welcome to the shop, ${u.name}. ${MEMBER_DAILY_FORTUNES} cookies are waiting for you today.`)
-  }
-  const onLogIn = async (details) => {
-    const u = await auth.logIn(details)
-    setPanel(null)
-    say(`Welcome back, ${u.name}.`)
+    say(`Welcome, ${u.name}. ${MEMBER_DAILY_FORTUNES} cookies are waiting for you today.`)
   }
   const onLogOut = async () => {
     await auth.logOut()
@@ -197,7 +197,7 @@ export default function App() {
   const jarHint = shop.pendingFortune
     ? 'Your cookie is waiting.'
     : shop.limit === 'guest'
-      ? 'Sign up to unlock the jar.'
+      ? 'Sign in to unlock the jar.'
       : shop.limit === 'daily'
         ? 'Fresh cookies at midnight.'
         : 'Choose a little fortune.'
@@ -208,11 +208,11 @@ export default function App() {
       : 'That was today’s last cookie. More at midnight.'
     : shop.left > 0
       ? `${shop.left} free ${shop.left === 1 ? 'cookie' : 'cookies'} left.`
-      : `That was your last free cookie (${FREE_FORTUNES} of ${FREE_FORTUNES}). Sign up for ${MEMBER_DAILY_FORTUNES} a day.`
-  const anotherLabel = shop.limit === 'guest' ? 'Sign up for more' : shop.limit === 'daily' ? 'Back at midnight' : 'Another fortune'
+      : `That was your last free cookie (${FREE_FORTUNES} of ${FREE_FORTUNES}). Sign in for ${MEMBER_DAILY_FORTUNES} a day.`
+  const anotherLabel = shop.limit === 'guest' ? 'Sign in for more' : shop.limit === 'daily' ? 'Back at midnight' : 'Another fortune'
 
   return (
-    <main className={`app ${ritual ? 'has-ritual' : ''}`}>
+    <main className={`app ${ritual ? 'has-ritual' : ''} ${panel ? 'has-panel' : ''}`}>
       <GoldDefs />
       <ShopScene
         ref={jarRef}
@@ -224,6 +224,7 @@ export default function App() {
         todayDrawn={!!shop.limit}
         jarHint={jarHint}
         jarLock={shop.limit}
+        covered={!!ritual || !!panel}
       />
 
       <div className="hud" aria-hidden={!!ritual}>
@@ -277,8 +278,7 @@ export default function App() {
         reason={accountReason}
         freeLeft={shop.left}
         stats={{ opened: shop.history.length, kept: shop.kept.length }}
-        onSignUp={onSignUp}
-        onLogIn={onLogIn}
+        onSignIn={onSignIn}
         onLogOut={onLogOut}
       />
       <WaitPanel open={panel === 'wait'} onClose={() => setPanel(null)} onJournal={() => setPanel('journal')} />
